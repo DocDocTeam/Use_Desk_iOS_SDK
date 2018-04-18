@@ -20,6 +20,8 @@ typedef void (^UDSConnectBlock)(BOOL success, NSString *error);
 typedef void (^UDSNewMessageBlock)(BOOL success, RCMessage *message);
 typedef void (^UDSErrorBlock)(NSArray *errors);
 typedef void (^UDSFeedbackMessageBlock)(RCMessage *message);
+typedef void (^UDSFeedbackAnswerMessageBlock)(BOOL succes);
+
 
 
 
@@ -41,6 +43,8 @@ typedef void (^UDSFeedbackMessageBlock)(RCMessage *message);
 @property (nonatomic, readwrite) UDSConnectBlock connectBlock;
 @property (nonatomic, readwrite) UDSErrorBlock errorBlock;
 @property (nonatomic, readwrite) UDSFeedbackMessageBlock feedbackMessageBlock;
+@property (nonatomic, readwrite) UDSFeedbackAnswerMessageBlock feedbackAnswerMessageBlock;
+
 @property (nonatomic, readwrite) NSMutableArray *historyMess;
 
 

@@ -45,6 +45,8 @@
 		500C8ABA203713B4003BFC84 /* UDOfflineForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 500C8AB8203713B4003BFC84 /* UDOfflineForm.m */; };
 		500C8ABE203B7107003BFC84 /* UDMimeType.m in Sources */ = {isa = PBXBuildFile; fileRef = 500C8ABD203B7107003BFC84 /* UDMimeType.m */; };
 		503CA710203C9BC800A7CBEA /* icon_file.png in Resources */ = {isa = PBXBuildFile; fileRef = 503CA70F203C9BC800A7CBEA /* icon_file.png */; };
+		505583A02087BE4B00DAFAA0 /* ic_like.png in Resources */ = {isa = PBXBuildFile; fileRef = 5055839E2087BE4B00DAFAA0 /* ic_like.png */; };
+		505583A12087BE4B00DAFAA0 /* ic_dislike.png in Resources */ = {isa = PBXBuildFile; fileRef = 5055839F2087BE4B00DAFAA0 /* ic_dislike.png */; };
 		505E01F3203206ED00E6D443 /* UseDeskSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 505E007C203206ED00E6D443 /* UseDeskSDK.m */; };
 		505E01F4203206ED00E6D443 /* UseDeskSDKHelp.m in Sources */ = {isa = PBXBuildFile; fileRef = 505E007F203206ED00E6D443 /* UseDeskSDKHelp.m */; };
 		505EF833202C9FAE00E6D443 /* UDStartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 505EF831202C9FAE00E6D443 /* UDStartViewController.m */; };
@@ -142,6 +144,8 @@
 		500C8ABC203B7107003BFC84 /* UDMimeType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UDMimeType.h; sourceTree = "<group>"; };
 		500C8ABD203B7107003BFC84 /* UDMimeType.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UDMimeType.m; sourceTree = "<group>"; };
 		503CA70F203C9BC800A7CBEA /* icon_file.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_file.png; sourceTree = "<group>"; };
+		5055839E2087BE4B00DAFAA0 /* ic_like.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_like.png; sourceTree = "<group>"; };
+		5055839F2087BE4B00DAFAA0 /* ic_dislike.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_dislike.png; sourceTree = "<group>"; };
 		505E0043203206ED00E6D443 /* UseDeskSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UseDeskSDK.h; sourceTree = "<group>"; };
 		505E007C203206ED00E6D443 /* UseDeskSDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UseDeskSDK.m; sourceTree = "<group>"; };
 		505E007E203206ED00E6D443 /* UseDeskSDKHelp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UseDeskSDKHelp.h; sourceTree = "<group>"; };
@@ -729,6 +733,15 @@
 			path = UDMimeType;
 			sourceTree = "<group>";
 		};
+		5055839D2087BE4B00DAFAA0 /* resouce */ = {
+			isa = PBXGroup;
+			children = (
+				5055839E2087BE4B00DAFAA0 /* ic_like.png */,
+				5055839F2087BE4B00DAFAA0 /* ic_dislike.png */,
+			);
+			path = resouce;
+			sourceTree = "<group>";
+		};
 		505E0042203206ED00E6D443 /* UseDeskSDK */ = {
 			isa = PBXGroup;
 			children = (
@@ -814,6 +827,7 @@
 		6003F593195388D20070C39A /* Example for Use_Desk_iOS_SDK */ = {
 			isa = PBXGroup;
 			children = (
+				5055839D2087BE4B00DAFAA0 /* resouce */,
 				6003F59C195388D20070C39A /* Use_Desk_iOS_SDKAppDelegate.h */,
 				6003F59D195388D20070C39A /* Use_Desk_iOS_SDKAppDelegate.m */,
 				505EF82F202C9F7100E6D443 /* UDStartViewController */,
@@ -958,12 +972,14 @@
 				500C8A462035E72C003BFC84 /* rcmessage_audio@2x.png in Resources */,
 				500C8A4B2035E72C003BFC84 /* rcmessage_attach@2x.png in Resources */,
 				505EF834202C9FAE00E6D443 /* UDStartViewController.xib in Resources */,
+				505583A12087BE4B00DAFAA0 /* ic_dislike.png in Resources */,
 				500C8A432035E72C003BFC84 /* rcmessage_send@2x.png in Resources */,
 				503CA710203C9BC800A7CBEA /* icon_file.png in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
 				500C8A4A2035E72C003BFC84 /* rcmessage_incoming.aiff in Resources */,
 				500C8A492035E72C003BFC84 /* rcmessages_videoplay@2x.png in Resources */,
 				500C8A472035E72C003BFC84 /* rcmessage_outgoing.aiff in Resources */,
+				505583A02087BE4B00DAFAA0 /* ic_like.png in Resources */,
 				500C8A5B2035E72C003BFC84 /* RCMessagesView.xib in Resources */,
 				500C8A452035E72C003BFC84 /* rcmessages_audioplay@2x.png in Resources */,
 				500C8A482035E72C003BFC84 /* rcmessages_manual@2x.png in Resources */,

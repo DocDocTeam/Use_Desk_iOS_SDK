@@ -61,14 +61,34 @@
     };
     
     UDS.newMessageBlock = ^(BOOL success, RCMessage *message) {
-        [rcmessages removeAllObjects];
+        //[rcmessages removeAllObjects];
         [rcmessages addObject:message];
         [self refreshTableView1];
-        
+
         
         if(message.incoming)
             [UDAudio playMessageIncoming];
 
+    };
+    
+    UDS.feedbackAnswerMessageBlock = ^(BOOL success){
+        UIAlertController * alert = [UIAlertController
+                                     alertControllerWithTitle:@""
+                                     message:@"Спасибо за вашу оценку"
+                                     preferredStyle:UIAlertControllerStyleAlert];
+        
+        
+        UIAlertAction* yesButton = [UIAlertAction
+                                    actionWithTitle:@"Ok"
+                                    style:UIAlertActionStyleDefault
+                                    handler:^(UIAlertAction * action) {
+                                        //Handle your yes please button action here
+                                    }];
+        
+        
+        [alert addAction:yesButton];
+        
+        [self presentViewController:alert animated:YES completion:nil];
     };
     
     UDS.errorBlock = ^(NSArray *errors) {
@@ -76,6 +96,12 @@
             hudErrorConnection.label.text = [errors objectAtIndex:0];
         [hudErrorConnection showAnimated:YES];
     };
+    
+    UDS.feedbackMessageBlock = ^ (RCMessage *message){
+        [rcmessages addObject:message];
+        [self refreshTableView1];
+    };
+    
     [self reloadhistory];
    
 

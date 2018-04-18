@@ -536,8 +536,8 @@
 	{
 		RCMessage *rcmessage = [self rcmessage:indexPath];
 		if (rcmessage.type == RC_TYPE_STATUS)	return [RCStatusCell height:indexPath messagesView:self];
-		if (rcmessage.type == RC_TYPE_TEXT)		return [RCTextMessageCell height:indexPath messagesView:self];
-		if (rcmessage.type == RC_TYPE_EMOJI)	return [RCEmojiMessageCell height:indexPath messagesView:self];
+		if (rcmessage.type == RC_TYPE_TEXT)     return [RCTextMessageCell height:indexPath messagesView:self];
+		if (rcmessage.type == RC_TYPE_Feedback) return [RCEmojiMessageCell height:indexPath messagesView:self];
 		if (rcmessage.type == RC_TYPE_PICTURE)	return [RCPictureMessageCell height:indexPath messagesView:self];
 		if (rcmessage.type == RC_TYPE_VIDEO)	return [RCVideoMessageCell height:indexPath messagesView:self];
 		if (rcmessage.type == RC_TYPE_AUDIO)	return [RCAudioMessageCell height:indexPath messagesView:self];
@@ -590,7 +590,7 @@
 			[cell bindData:indexPath messagesView:self];
 			return cell;
 		}
-		if (rcmessage.type == RC_TYPE_EMOJI)
+		if (rcmessage.type == RC_TYPE_Feedback)
 		{
 			RCEmojiMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RCEmojiMessageCell" forIndexPath:indexPath];
 			[cell bindData:indexPath messagesView:self];

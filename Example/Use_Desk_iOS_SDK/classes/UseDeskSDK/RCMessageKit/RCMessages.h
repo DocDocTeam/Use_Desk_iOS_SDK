@@ -30,6 +30,8 @@
 #define		RC_TYPE_AUDIO						6
 #define		RC_TYPE_LOCATION					7
 #define     RC_TYPE_File                        8
+#define     RC_TYPE_Feedback                    9
+
 
 //---------------------------------------------------------------------------------
 #define		RC_STATUS_LOADING					1

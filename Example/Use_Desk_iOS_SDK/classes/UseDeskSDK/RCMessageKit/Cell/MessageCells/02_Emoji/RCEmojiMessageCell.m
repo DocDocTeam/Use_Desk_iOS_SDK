@@ -10,6 +10,7 @@
 // THE SOFTWARE.
 
 #import "RCEmojiMessageCell.h"
+#import "UseDeskSDK.h"
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 @interface RCEmojiMessageCell()
@@ -44,9 +45,10 @@
 	if (textView == nil)
 	{
 		textView = [[UITextView alloc] init];
-		textView.font = [RCMessages emojiFont];
+		textView.font = [RCMessages textFont];
 		textView.editable = NO;
 		textView.selectable = NO;
+        textView.textAlignment = NSTextAlignmentCenter;
 		textView.scrollEnabled = NO;
 		textView.userInteractionEnabled = NO;
 		textView.backgroundColor = [UIColor clearColor];
@@ -54,6 +56,32 @@
 		textView.textContainerInset = [RCMessages emojiInset];
 		[self.viewBubble addSubview:textView];
 	}
+    
+    
+    if(self.dislikeButton == nil){
+        
+        self.dislikeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [self.dislikeButton setBackgroundImage:[UIImage imageNamed:@"ic_dislike.png"]
+                                   forState:UIControlStateNormal];
+        [self.dislikeButton addTarget:self
+                            action:@selector(dislikeButton_pressed:)
+                  forControlEvents:UIControlEventTouchUpInside];
+        [self.viewBubble addSubview:self.dislikeButton];
+        
+    }
+    
+    
+    if(self.likeButton == nil){
+        
+        self.likeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [self.likeButton setBackgroundImage:[UIImage imageNamed:@"ic_like.png"]
+                       forState:UIControlStateNormal];
+        [self.likeButton addTarget:self
+                action:@selector(likeButton_pressed:)
+      forControlEvents:UIControlEventTouchUpInside];
+        [self.viewBubble addSubview:self.likeButton];
+        
+    }
 	//---------------------------------------------------------------------------------------------------------------------------------------------
 
 	//---------------------------------------------------------------------------------------------------------------------------------------------
@@ -61,6 +89,12 @@
 	//---------------------------------------------------------------------------------------------------------------------------------------------
 }
 
+-(void)dislikeButton_pressed:(id)sender{
+    [UDS sendMessageFeedBack:NO];
+}
+-(void)likeButton_pressed:(id)sender{
+    [UDS sendMessageFeedBack:YES];
+}
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 - (void)layoutSubviews
 //-------------------------------------------------------------------------------------------------------------------------------------------------
@@ -69,7 +103,10 @@
 	//---------------------------------------------------------------------------------------------------------------------------------------------
 	[super layoutSubviews:size];
 	//---------------------------------------------------------------------------------------------------------------------------------------------
-	textView.frame = CGRectMake(0, 0, size.width, size.height);
+	textView.frame = CGRectMake(0, size.height-80, size.width, 80);
+    self.dislikeButton.frame = CGRectMake(size.width*1/10, size.height/4, size.width/4, size.height/4);
+    self.likeButton.frame = CGRectMake(size.width*2/3, size.height/4, size.width/4, size.height/4);
+
 }
 
 #pragma mark - Size methods

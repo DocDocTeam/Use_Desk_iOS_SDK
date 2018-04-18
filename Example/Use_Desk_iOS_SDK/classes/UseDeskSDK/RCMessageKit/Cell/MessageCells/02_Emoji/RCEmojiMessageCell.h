@@ -16,6 +16,11 @@
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 
 @property (strong, nonatomic) UITextView *textView;
+@property (strong, nonatomic) UIButton *likeButton;
+@property (strong, nonatomic) UIButton *dislikeButton;
+
+
+
 
 - (void)bindData:(NSIndexPath *)indexPath messagesView:(RCMessagesView *)messagesView;
 

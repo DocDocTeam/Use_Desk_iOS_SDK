@@ -9,15 +9,15 @@ swift_version = "4.0"
 target 'Use_Desk_iOS_SDK_Example' do
     #pod 'Realm'
     
-    #pod 'MBProgressHUD'
-    #pod 'NYTPhotoViewer', '1.2.0'
-    #pod 'ProgressHUD'
-    #pod 'RCAudioPlayer'
-    #pod 'Socket.IO-Client-Swift'
-    #pod 'AFNetworking', '~> 3.1.0'
-    #pod 'RCAudioPlayer'
-    #pod 'NSDate-Escort'
-    #pod 'NSDate+Helpers'
+    pod 'MBProgressHUD'
+    pod 'NYTPhotoViewer', '1.2.0'
+    pod 'ProgressHUD'
+    pod 'RCAudioPlayer'
+    pod 'Socket.IO-Client-Swift'
+    pod 'AFNetworking', '~> 3.1.0'
+    pod 'RCAudioPlayer'
+    pod 'NSDate-Escort'
+    pod 'NSDate+Helpers'
     pod 'Use_Desk_iOS_SDK', :path => '../'
 
   target 'Use_Desk_iOS_SDK_Tests' do

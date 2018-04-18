@@ -11,6 +11,7 @@
 #import "UDOfflineForm.h"
 #import "UDNavigationController.h"
 #import "RCMessage.h"
+#import "AFHTTPSessionManager.h"
 
 
 
@@ -140,6 +141,9 @@ static UseDeskSDK * s_instance;
             startBlock(NO,@"noOperators");
         
         
+        
+        
+        
         BOOL auth_success = [self action_ADD_INIT:data];
     
         if(auth_success && startBlock)
@@ -148,6 +152,8 @@ static UseDeskSDK * s_instance;
         if(auth_success && self.connectBlock)
             self.connectBlock(YES,nil);
         
+        [self action_Feedback_Answer:data];
+
         [self action_ADD_MESSAGE:data];
         
 
@@ -206,9 +212,17 @@ static UseDeskSDK * s_instance;
     
     NSDictionary * payload = [mess objectForKey:@"payload"];
     
-    if(payload != nil){
-        m.avatar = [payload objectForKey:@"avatar"];
+  
+    if(payload != nil && [payload isKindOfClass:[NSDictionary class]]){
+        id avatar = [payload objectForKey:@"avatar"];
+        
+        if(avatar != nil){
+            m.avatar = [payload objectForKey:@"avatar"];
+        }
+        
     }
+    
+
     
     NSDictionary * fileDic = [mess objectForKey:@"file"];
     if(fileDic != nil){
@@ -226,8 +240,16 @@ static UseDeskSDK * s_instance;
             m.picture_width = 0.6 * SCREEN_WIDTH;
             m.picture_height = 0.6 * SCREEN_WIDTH;;
     }
+    
+    if(payload != nil && [payload isKindOfClass:[NSString class]]){
+        m.feedback = YES;
+        m.type = 9;
+    }
+    
+    
         return m;
 }
+
 
 -(BOOL)action_INITED_no_operators:(NSArray*)data{
     
@@ -271,6 +293,20 @@ static UseDeskSDK * s_instance;
     
 }
 
+-(void)action_Feedback_Answer:(NSArray*)data{
+    NSDictionary *dicServer = (NSDictionary*)[data objectAtIndex:0];
+    
+    NSString *type = [dicServer objectForKey:@"type"];
+    if(type == nil)
+        return;
+    if(![type isEqualToString:@"@@chat/current/CALLBACK_ANSWER"])
+        return;
+    
+    NSDictionary *answer = [dicServer objectForKey:@"answer"];
+    if(self.feedbackAnswerMessageBlock)
+        self.feedbackAnswerMessageBlock([answer objectForKey:@"status"]);
+
+}
 -(void)action_ADD_MESSAGE:(NSArray*)data{
     
     NSDictionary *dicServer = (NSDictionary*)[data objectAtIndex:0];
@@ -294,13 +330,18 @@ static UseDeskSDK * s_instance;
             return ;
         
         RCMessage *mess = [self parseMessageDic:message];
+        
+        if(mess.feedback && self.feedbackMessageBlock){
+            self.feedbackMessageBlock(mess);
+            return;
+        }
         if(self.newMessageBlock)
             self.newMessageBlock(YES,mess);
     }
 }
 
 -(void)sendMessageFeedBack:(BOOL)status{
-    
+    [socket emit:@"dispatch" with:[UseDeskSDKHelp feedback:status]];
 }
 
 -(void)save:(NSString*)email token:(NSString*)token{

@@ -13,6 +13,7 @@
 +(NSString *)dictToJson:(NSDictionary *)dict;
 +(NSArray*)dataEmail:(NSString*)email;
 +(NSArray*)messageText:(NSString*)text;
++(NSArray*)feedback:(BOOL)fb;
 +(NSArray*)message:(NSString *)text withFileName:(NSString*)fileName fileType:(NSString*)fileType contentBase64:(NSString*)contentBase64;
 +(NSString *)imageToNSString:(UIImage *)image;
 @end

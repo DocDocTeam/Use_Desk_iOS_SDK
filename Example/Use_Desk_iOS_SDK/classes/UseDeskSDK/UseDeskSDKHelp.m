@@ -31,6 +31,8 @@
     return @[dic];
 }
 
+
+
 +(NSArray*)messageText:(NSString*)text{
 
     NSDictionary *message = [[NSDictionary alloc] initWithObjectsAndKeys:text,@"text",
@@ -38,6 +40,28 @@
     
     NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"@@server/chat/SEND_MESSAGE",@"type",
                          message,@"message",
+                         nil];
+    return @[dic];
+}
+
++(NSArray*)feedback:(BOOL)fb{
+    
+    
+    NSString *data;
+    
+    if(fb)
+        data = @"LIKE";
+    else
+        data = @"DISLIKE";
+    
+    
+    
+    NSDictionary *payload = [[NSDictionary alloc] initWithObjectsAndKeys:data,@"data",
+                                                                         @"action",@"type",
+                             nil];
+    
+    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"@@server/chat/CALLBACK",@"type",
+                         payload,@"payload",
                          nil];
     return @[dic];
 }
@@ -69,6 +93,7 @@
     }
     return nil;
 }
+
 
 +(NSString *)imageToNSString:(UIImage *)image
 {

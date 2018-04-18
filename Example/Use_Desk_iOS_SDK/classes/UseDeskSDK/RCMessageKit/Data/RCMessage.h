@@ -34,6 +34,9 @@
 @property (assign, nonatomic) BOOL incoming;
 @property (assign, nonatomic) BOOL outgoing;
 
+@property (assign, nonatomic) BOOL feedback;
+
+
 @property (strong, nonatomic) NSString *text;
 
 @property (strong, nonatomic) UIImage *picture_image;

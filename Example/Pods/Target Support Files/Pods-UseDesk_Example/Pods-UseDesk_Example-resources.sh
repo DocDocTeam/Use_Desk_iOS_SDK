@@ -91,6 +91,36 @@ EOM
       ;;
   esac
 }
+if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_resource "${PODS_ROOT}/../../UseDesk/Classes/AudioView.xib"
+  install_resource "${PODS_ROOT}/../../UseDesk/Classes/icon_file.png"
+  install_resource "${PODS_ROOT}/../../UseDesk/Classes/ic_dislike.png"
+  install_resource "${PODS_ROOT}/../../UseDesk/Classes/ic_like.png"
+  install_resource "${PODS_ROOT}/../../UseDesk/Classes/RCMessagesView.xib"
+  install_resource "${PODS_ROOT}/../../UseDesk/Classes/rcmessages_audiopause@2x.png"
+  install_resource "${PODS_ROOT}/../../UseDesk/Classes/rcmessages_audioplay@2x.png"
+  install_resource "${PODS_ROOT}/../../UseDesk/Classes/rcmessages_manual@2x.png"
+  install_resource "${PODS_ROOT}/../../UseDesk/Classes/rcmessages_videoplay@2x.png"
+  install_resource "${PODS_ROOT}/../../UseDesk/Classes/rcmessage_attach@2x.png"
+  install_resource "${PODS_ROOT}/../../UseDesk/Classes/rcmessage_audio@2x.png"
+  install_resource "${PODS_ROOT}/../../UseDesk/Classes/rcmessage_send@2x.png"
+  install_resource "${PODS_ROOT}/../../UseDesk/Classes/UDOfflineForm.xib"
+fi
+if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_resource "${PODS_ROOT}/../../UseDesk/Classes/AudioView.xib"
+  install_resource "${PODS_ROOT}/../../UseDesk/Classes/icon_file.png"
+  install_resource "${PODS_ROOT}/../../UseDesk/Classes/ic_dislike.png"
+  install_resource "${PODS_ROOT}/../../UseDesk/Classes/ic_like.png"
+  install_resource "${PODS_ROOT}/../../UseDesk/Classes/RCMessagesView.xib"
+  install_resource "${PODS_ROOT}/../../UseDesk/Classes/rcmessages_audiopause@2x.png"
+  install_resource "${PODS_ROOT}/../../UseDesk/Classes/rcmessages_audioplay@2x.png"
+  install_resource "${PODS_ROOT}/../../UseDesk/Classes/rcmessages_manual@2x.png"
+  install_resource "${PODS_ROOT}/../../UseDesk/Classes/rcmessages_videoplay@2x.png"
+  install_resource "${PODS_ROOT}/../../UseDesk/Classes/rcmessage_attach@2x.png"
+  install_resource "${PODS_ROOT}/../../UseDesk/Classes/rcmessage_audio@2x.png"
+  install_resource "${PODS_ROOT}/../../UseDesk/Classes/rcmessage_send@2x.png"
+  install_resource "${PODS_ROOT}/../../UseDesk/Classes/UDOfflineForm.xib"
+fi
 
 mkdir -p "${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"
 rsync -avr --copy-links --no-relative --exclude '*/.svn/*' --files-from="$RESOURCES_TO_COPY" / "${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"

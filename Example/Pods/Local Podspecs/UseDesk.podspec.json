@@ -19,7 +19,12 @@
     "ios": "9.0"
   },
   "swift_version": "4.0",
-  "source_files": "UseDesk/Classes/**/*",
+  "requires_arc": true,
+  "static_framework": true,
+  "ios": {
+    "source_files": "UseDesk/Classes/*.{h,m}"
+  },
+  "resources": "UseDesk/Classes/*.{png,jpeg,jpg,storyboard,xib}",
   "frameworks": [
     "UIKit",
     "MapKit",
@@ -42,9 +47,12 @@
 
     ],
     "AFNetworking": [
-      "~> 3.1.0"
+      ">= 3.1.0"
     ],
     "NSDate-Escort": [
+
+    ],
+    "QBImagePickerController": [
 
     ],
     "NSDate+Helpers": [

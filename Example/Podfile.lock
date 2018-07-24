@@ -1,18 +1,18 @@
 PODS:
-  - AFNetworking (3.1.0):
-    - AFNetworking/NSURLSession (= 3.1.0)
-    - AFNetworking/Reachability (= 3.1.0)
-    - AFNetworking/Security (= 3.1.0)
-    - AFNetworking/Serialization (= 3.1.0)
-    - AFNetworking/UIKit (= 3.1.0)
-  - AFNetworking/NSURLSession (3.1.0):
+  - AFNetworking (3.2.1):
+    - AFNetworking/NSURLSession (= 3.2.1)
+    - AFNetworking/Reachability (= 3.2.1)
+    - AFNetworking/Security (= 3.2.1)
+    - AFNetworking/Serialization (= 3.2.1)
+    - AFNetworking/UIKit (= 3.2.1)
+  - AFNetworking/NSURLSession (3.2.1):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/Reachability (3.1.0)
-  - AFNetworking/Security (3.1.0)
-  - AFNetworking/Serialization (3.1.0)
-  - AFNetworking/UIKit (3.1.0):
+  - AFNetworking/Reachability (3.2.1)
+  - AFNetworking/Security (3.2.1)
+  - AFNetworking/Serialization (3.2.1)
+  - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
   - FLAnimatedImage (1.0.12)
   - MBProgressHUD (1.1.0)
@@ -26,17 +26,19 @@ PODS:
     - NYTPhotoViewer/Core
   - NYTPhotoViewer/Core (1.2.0)
   - ProgressHUD (2.60)
+  - QBImagePickerController (3.4.0)
   - RCAudioPlayer (1.01)
   - Socket.IO-Client-Swift (13.2.1):
     - Starscream (~> 3.0.2)
   - Starscream (3.0.5)
   - UseDesk (0.1.0):
-    - AFNetworking (~> 3.1.0)
+    - AFNetworking (>= 3.1.0)
     - MBProgressHUD
     - "NSDate+Helpers"
     - NSDate-Escort
     - NYTPhotoViewer (= 1.2.0)
     - ProgressHUD
+    - QBImagePickerController
     - RCAudioPlayer
     - Socket.IO-Client-Swift
 
@@ -52,6 +54,7 @@ SPEC REPOS:
     - NSDate-Escort
     - NYTPhotoViewer
     - ProgressHUD
+    - QBImagePickerController
     - RCAudioPlayer
     - Socket.IO-Client-Swift
     - Starscream
@@ -61,18 +64,19 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
   FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   "NSDate+Helpers": 0da797ac3e0d663ed9ee7387df4c500256cc3343
   NSDate-Escort: c79db277a401c0ad219acd295ec17c7b4f61266f
   NYTPhotoViewer: 323217e4590a1586eb3c9674b3fefb0fb8b57896
   ProgressHUD: 4e4efbaf4f5de8bd32e0c4c3b6644a90ea1a8c3e
+  QBImagePickerController: d54cf93db6decf26baf6ed3472f336ef35cae022
   RCAudioPlayer: c0ddab68cc30359efaa0b6b2f179060c481eef81
   Socket.IO-Client-Swift: b94943e2fb916fe2f95244b9ed21828634002280
   Starscream: faf918b2f2eff7d5dd21180646bf015a669673bd
-  UseDesk: 63fad2bdf8c1e5f3fdc121a5c8a5ece5b3ff8d07
+  UseDesk: 3277b676f6027ee26cd0f6afe8cc67d0f24dc40d
 
-PODFILE CHECKSUM: 7f5b0e0791b52040b84d01983c7ac066386b7170
+PODFILE CHECKSUM: fcf138565850e177cae404d362c8ad53891cfcee
 
 COCOAPODS: 1.5.3

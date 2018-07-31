@@ -10,8 +10,7 @@
 // THE SOFTWARE.
 
 #import "RCPictureMessageCell.h"
-#import "Utility.h"
-
+#import "UDMimeType.h"
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 @interface RCPictureMessageCell()
 {

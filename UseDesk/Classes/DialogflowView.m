@@ -1,12 +1,13 @@
 #import "DialogflowView.h"
 #import "UseDeskSDK.h"
-#import "Utility.h"
-
-
+#import "UDAudio.h"
+#import "NSDate+Escort.h"
+#import "NSDate+Helpers.h"
+#import <QBImagePickerController/QBImagePickerController.h>
 //-------------------------------------------------------------------------------------------------------------------------------------------------
-@interface DialogflowView () <UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@interface DialogflowView () <UIImagePickerControllerDelegate,UINavigationControllerDelegate,QBImagePickerControllerDelegate>
 {
-    UIImage *sendImage;
+    NSArray *sendImageArr;
 }
 @end
 //-------------------------------------------------------------------------------------------------------------------------------------------------
@@ -327,17 +328,33 @@
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
 	[UDAudio playMessageOutgoing];
-    if(sendImage == nil){
+    if([sendImageArr count] == 0 || sendImageArr == nil){
         [UDS sendMessage:text];
     }
     else{
-        NSString *content = [NSString stringWithFormat:@"data:image/png;base64,%@",[UseDeskSDKHelp imageToNSString:sendImage]];
-        [UDS sendMessage:text withFileName:@"file" fileType:@"image/png" contentBase64:content];
-        sendImage = nil;
+        for(int i = 0; i < [sendImageArr count];i++){
+            PHAsset * asset = [sendImageArr objectAtIndex:i];
+            NSString *content = [NSString stringWithFormat:@"data:image/png;base64,%@",[UseDeskSDKHelp imageToNSString:[self getAssetThumbnail:asset]]];
+            [UDS sendMessage:text withFileName:@"file" fileType:@"image/png" contentBase64:content];
+        }
+        sendImageArr = nil;
         self.labelAttachmentFile.hidden = YES;
+            
 
     }
 	//---------------------------------------------------------------------------------------------------------------------------------------------
+}
+
+-(UIImage *)getAssetThumbnail:(PHAsset * )asset {
+    
+    PHImageRequestOptions *options = [[PHImageRequestOptions alloc]init];
+    options.synchronous = true;
+    
+    __block UIImage *image;
+    [PHCachingImageManager.defaultManager requestImageForAsset:asset targetSize:CGSizeMake(asset.pixelWidth, asset.pixelHeight) contentMode:PHImageContentModeAspectFit options:options resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+        image = result;
+    }];
+    return image;
 }
 
 - (void)actionAttachMessage
@@ -388,14 +405,36 @@
 
 - (void)selectPhoto {
     
-    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-    picker.delegate = self;
-    picker.allowsEditing = YES;
-    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    QBImagePickerController *imagePickerController = [QBImagePickerController new];
+    imagePickerController.delegate = self;
+    imagePickerController.allowsMultipleSelection = YES;
+    imagePickerController.maximumNumberOfSelection = 3;
+    imagePickerController.showsNumberOfSelectedAssets = YES;
     
-    [self presentViewController:picker animated:YES completion:NULL];
+    [self presentViewController:imagePickerController animated:YES completion:NULL];
     
     
+}
+
+#pragma mark - QBImagePickerControllerDelegate
+
+- (void)qb_imagePickerController:(QBImagePickerController *)imagePickerController didFinishPickingAssets:(NSArray *)assets
+{
+    NSLog(@"Selected assets:");
+    NSLog(@"%@", assets);
+    sendImageArr = [NSArray arrayWithArray:assets];
+    self.labelAttachmentFile.text = [NSString stringWithFormat:@"%lu attachment",(unsigned long)[sendImageArr count]];
+    self.labelAttachmentFile.hidden = NO;
+    self.buttonInputSend.hidden = NO;
+    
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
+- (void)qb_imagePickerControllerDidCancel:(QBImagePickerController *)imagePickerController
+{
+    NSLog(@"Canceled.");
+    
+    [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
 
@@ -403,8 +442,10 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
     UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
-    sendImage = chosenImage;
+    sendImageArr = [NSArray arrayWithObject:chosenImage];
     self.labelAttachmentFile.hidden = NO;
+    self.labelAttachmentFile.text = [NSString stringWithFormat:@"%lu attachment",(unsigned long)[sendImageArr count]];
+    
     self.buttonInputSend.hidden = NO;
    // self.imageView.image = chosenImage;
     

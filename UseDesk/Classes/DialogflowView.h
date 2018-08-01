@@ -10,13 +10,9 @@
 // THE SOFTWARE.
 
 #import "RCMessagesView.h"
-#import "MBProgressHUD.h"
-
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
-@interface DialogflowView : RCMessagesView{
-    MBProgressHUD *hudErrorConnection;
-}
+@interface DialogflowView : RCMessagesView
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 
 @property NSMutableArray *rcmessages;

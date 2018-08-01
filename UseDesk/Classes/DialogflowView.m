@@ -3,11 +3,13 @@
 #import "UDAudio.h"
 #import "NSDate+Escort.h"
 #import "NSDate+Helpers.h"
+#import "MBProgressHUD.h"
 #import <QBImagePickerController/QBImagePickerController.h>
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 @interface DialogflowView () <UIImagePickerControllerDelegate,UINavigationControllerDelegate,QBImagePickerControllerDelegate>
 {
     NSArray *sendImageArr;
+    MBProgressHUD *hudErrorConnection;
 }
 @end
 //-------------------------------------------------------------------------------------------------------------------------------------------------

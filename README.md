@@ -24,12 +24,27 @@ it, simply add the following line to your Podfile:
 
 -Клонировать репозиторий
 
+-Запустить терминал
+
+-Перейти в скаченную дирректорию (в папку Example)
+
+-Выполнить команду `pod install`
+
 ## Скриншоты Тестового приложения
 <a href="https://imgur.com/qVKFEi2"><img src="https://i.imgur.com/qVKFEi2.png?1" title="source: imgur.com" /></a>
 <a href="https://imgur.com/sbQW9WI"><img src="https://i.imgur.com/sbQW9WI.png?2" title="source: imgur.com" /></a>
 <a href="https://imgur.com/BmvNVGc"><img src="https://i.imgur.com/BmvNVGc.png?1" title="source: imgur.com" /></a>
 
 ## Добавление библиотеки в проект:
+
+Библиотека Use_Desk_iOS_SDK доступна через систему управления зависимостями [CocoaPods](http://cocoapods.org).
+
+-Добавьте строчку в Podfile вашего приложения
+```ruby
+pod 'Use_Desk_iOS_SDK'
+```
+
+-Выполните команду в терминале `pod update`
 
 -Подключаем библиотеку #import "UseDeskSDK.h"`
 

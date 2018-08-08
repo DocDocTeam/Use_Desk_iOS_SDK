@@ -270,7 +270,7 @@
 	CGFloat heightKeyboard = keyboard.size.height;
 	//---------------------------------------------------------------------------------------------------------------------------------------------
 	[UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
-		self.view.center = CGPointMake(centerView.x, centerView.y - heightKeyboard);
+        self.view.transform = CGAffineTransformTranslate(CGAffineTransformIdentity, 0, -heightKeyboard);
 	} completion:nil];
 	//---------------------------------------------------------------------------------------------------------------------------------------------
 	[[UIMenuController sharedMenuController] setMenuItems:nil];
@@ -284,7 +284,7 @@
 	NSTimeInterval duration = [[info valueForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
 	//---------------------------------------------------------------------------------------------------------------------------------------------
 	[UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
-		self.view.center = centerView;
+        self.view.transform = CGAffineTransformIdentity;
 	} completion:nil];
 }
 
@@ -323,6 +323,7 @@
 {
 	buttonInputAudio.hidden = ([textInput.text length] != 0);
 	buttonInputSend.hidden = ([textInput.text length] == 0);
+    [self scrollToBottom:NO];
 }
 
 #pragma mark - User actions (title)

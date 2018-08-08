@@ -47,7 +47,7 @@ TODO: Add long description of the pod here.
   s.dependency 'NYTPhotoViewer', '1.2.0'
   s.dependency 'ProgressHUD'
   s.dependency 'RCAudioPlayer'
-  s.dependency 'Socket.IO-Client-Swift'
+  s.dependency 'Socket.IO-Client-Swift', '~> 9.0.1'
   s.dependency 'AFNetworking', '>= 3.1.0'
   s.dependency 'RCAudioPlayer'
   s.dependency 'NSDate-Escort'

@@ -28,7 +28,6 @@ typedef void (^UDSFeedbackAnswerMessageBlock)(BOOL succes);
 
 @interface UseDeskSDK : NSObject{
     
-    SocketManager* manager;
     SocketIOClient* socket;
     
     NSString *companyID;

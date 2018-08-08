@@ -105,9 +105,8 @@ static UseDeskSDK * s_instance;
     NSDictionary *config = @{
                              @"log":@YES
                              };
-    manager = [[SocketManager alloc] initWithSocketURL:urlAdress config: config];
     
-    socket = manager.defaultSocket;
+    socket = [[SocketIOClient alloc] initWithSocketURL:urlAdress config:config];
     
     [socket connect];
 
@@ -209,7 +208,9 @@ static UseDeskSDK * s_instance;
     m.incoming = ([[mess objectForKey:@"type"] isEqualToString:@"client_to_operator"])?NO:YES;
     m.outgoing = !m.incoming;
     m.text = [mess objectForKey:@"text"];
-    
+//    NSData *cpData = [(NSString *)[mess objectForKey:@"text"] dataUsingEncoding:NSUnicodeStringEncoding];
+//    m.text = [[NSString alloc] initWithData:cpData encoding:NSUTF16StringEncoding];
+//
     NSDictionary * payload = [mess objectForKey:@"payload"];
     
   

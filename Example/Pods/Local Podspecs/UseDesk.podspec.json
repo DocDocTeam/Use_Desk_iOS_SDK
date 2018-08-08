@@ -1,6 +1,6 @@
 {
   "name": "UseDesk",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "summary": "A short description of UseDesk.",
   "description": "TODO: Add long description of the pod here.",
   "homepage": "https://github.com/xot-dog/UseDesk.git",
@@ -12,8 +12,8 @@
     "serega@budyakov.com": "ixotdog@gmail.com"
   },
   "source": {
-    "git": "https://github.com/xot-dog/UseDesk.git",
-    "tag": "0.1.0"
+    "git": "https://github.com/usedesk/Use_Desk_iOS_SDK",
+    "tag": "0.1.1"
   },
   "platforms": {
     "ios": "9.0"
@@ -44,7 +44,7 @@
 
     ],
     "Socket.IO-Client-Swift": [
-
+      "~> 9.0.1"
     ],
     "AFNetworking": [
       ">= 3.1.0"

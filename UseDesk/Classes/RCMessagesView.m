@@ -321,52 +321,8 @@
 - (void)inputPanelUpdate
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
-	CGFloat widthText = textInput.frame.size.width, heightText;
-	CGSize sizeText = [textInput sizeThatFits:CGSizeMake(widthText, MAXFLOAT)];
-	//---------------------------------------------------------------------------------------------------------------------------------------------
-	heightText = fmaxf([RCMessages inputTextHeightMin], sizeText.height);
-	heightText = fminf([RCMessages inputTextHeightMax], heightText);
-	//---------------------------------------------------------------------------------------------------------------------------------------------
-	CGFloat heightInput = heightText + ([RCMessages inputViewHeightMin] - [RCMessages inputTextHeightMin]);
-	//---------------------------------------------------------------------------------------------------------------------------------------------
-
-	//---------------------------------------------------------------------------------------------------------------------------------------------
-	self.tableView.frame = CGRectMake(0, 0, SCREEN_WIDTH, heightView - heightInput);
-	//---------------------------------------------------------------------------------------------------------------------------------------------
-	CGRect frameViewInput = viewInput.frame;
-	frameViewInput.origin.y = heightView - heightInput;
-	frameViewInput.size.height = heightInput;
-	viewInput.frame = frameViewInput;
-	//---------------------------------------------------------------------------------------------------------------------------------------------
-	[viewInput layoutIfNeeded];
-	//---------------------------------------------------------------------------------------------------------------------------------------------
-
-	//---------------------------------------------------------------------------------------------------------------------------------------------
-	CGRect frameAttach = buttonInputAttach.frame;
-	frameAttach.origin.y = heightInput - frameAttach.size.height;
-	buttonInputAttach.frame = frameAttach;
-	//---------------------------------------------------------------------------------------------------------------------------------------------
-	CGRect frameTextInput = textInput.frame;
-	frameTextInput.size.height = heightText;
-	textInput.frame = frameTextInput;
-	//---------------------------------------------------------------------------------------------------------------------------------------------
-	CGRect frameAudio = buttonInputAudio.frame;
-	frameAudio.origin.y = heightInput - frameAudio.size.height;
-	buttonInputAudio.frame = frameAudio;
-	//---------------------------------------------------------------------------------------------------------------------------------------------
-	CGRect frameSend = buttonInputSend.frame;
-	frameSend.origin.y = heightInput - frameSend.size.height;
-	buttonInputSend.frame = frameSend;
-	//---------------------------------------------------------------------------------------------------------------------------------------------
 	buttonInputAudio.hidden = ([textInput.text length] != 0);
 	buttonInputSend.hidden = ([textInput.text length] == 0);
-	//---------------------------------------------------------------------------------------------------------------------------------------------
-
-	//---------------------------------------------------------------------------------------------------------------------------------------------
-	CGPoint offset = CGPointMake(0, sizeText.height - heightText);
-	[textInput setContentOffset:offset animated:NO];
-	//---------------------------------------------------------------------------------------------------------------------------------------------
-	[self scrollToBottom:NO];
 }
 
 #pragma mark - User actions (title)

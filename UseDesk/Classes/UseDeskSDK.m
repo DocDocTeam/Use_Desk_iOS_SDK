@@ -15,13 +15,19 @@
 #import "NSDate+Helpers.h"
 #import "MBProgressHUD.h"
 
-
-#define RootView [[[UIApplication sharedApplication] keyWindow] rootViewController]
-
 @implementation UseDeskSDK
 
 
 static UseDeskSDK * s_instance;
+
+- (UIViewController *)topController {
+    UIViewController *top = UIApplication.sharedApplication.keyWindow.rootViewController;
+    while (top.presentedViewController != nil &&
+           !top.presentedViewController.isBeingDismissed) {
+        top = top.presentedViewController;
+    }
+    return top;
+}
 
 +(UseDeskSDK*)getInstance{
     if (s_instance == nil) {
@@ -47,7 +53,7 @@ static UseDeskSDK * s_instance;
 
 -(void)startWithCompanyID:(NSString*)_companyID email:(NSString*)_email url:(NSString*)_url port:(NSString*)_port connectionStatus:(UDSStartBlock)startBlock{
 
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:RootView.view animated:YES];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.topController.view animated:YES];
     hud.mode = MBProgressHUDModeIndeterminate;
     hud.label.text = @"Loading";
     
@@ -66,7 +72,7 @@ static UseDeskSDK * s_instance;
                     [hud hideAnimated:YES];
                     DialogflowView *dialogflowView = [[DialogflowView alloc] init];
                     UDNavigationController *navController = [[UDNavigationController alloc] initWithRootViewController:dialogflowView];
-                    [RootView presentViewController:navController animated:YES completion:nil];
+                    [self.topController presentViewController:navController animated:YES completion:nil];
                 });
             }else{
                 if([error isEqualToString:@"noOperators"]){
@@ -74,7 +80,7 @@ static UseDeskSDK * s_instance;
                     UDOfflineForm *offline = [[UDOfflineForm alloc] initWithNibName:@"UDOfflineForm" bundle:nil];
                     offline.url = url;
                     UDNavigationController *navController = [[UDNavigationController alloc] initWithRootViewController:offline];
-                    [RootView presentViewController:navController animated:YES completion:nil];
+                    [self.topController presentViewController:navController animated:YES completion:nil];
                 }
             }
             

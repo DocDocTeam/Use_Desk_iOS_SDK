@@ -1,6 +1,6 @@
 {
   "name": "UseDesk",
-  "version": "0.1.1",
+  "version": "0.1.4",
   "summary": "A short description of UseDesk.",
   "description": "TODO: Add long description of the pod here.",
   "homepage": "https://github.com/xot-dog/UseDesk.git",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/usedesk/Use_Desk_iOS_SDK",
-    "tag": "0.1.1"
+    "tag": "0.1.4"
   },
   "platforms": {
     "ios": "9.0"

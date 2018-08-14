@@ -50,6 +50,9 @@ static UseDeskSDK * s_instance;
     return [UseDeskSDK getInstance];
 }
 
+- (BOOL)dialogShown {
+    return [self.topController isKindOfClass:[UDNavigationController class]];
+}
 
 -(void)startWithCompanyID:(NSString*)_companyID email:(NSString*)_email url:(NSString*)_url port:(NSString*)_port connectionStatus:(UDSStartBlock)startBlock{
 
@@ -67,6 +70,9 @@ static UseDeskSDK * s_instance;
     
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         [UDS startWithoutGUICompanyID:companyId email:email url:urlChat connectionStatus:^(BOOL success, NSString *error) {
+            if ([self dialogShown]) {
+                return;
+            }
             if(success){
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [hud hideAnimated:YES];
@@ -214,9 +220,6 @@ static UseDeskSDK * s_instance;
     m.incoming = ([[mess objectForKey:@"type"] isEqualToString:@"client_to_operator"])?NO:YES;
     m.outgoing = !m.incoming;
     m.text = [mess objectForKey:@"text"];
-//    NSData *cpData = [(NSString *)[mess objectForKey:@"text"] dataUsingEncoding:NSUnicodeStringEncoding];
-//    m.text = [[NSString alloc] initWithData:cpData encoding:NSUTF16StringEncoding];
-//
     NSDictionary * payload = [mess objectForKey:@"payload"];
     
   

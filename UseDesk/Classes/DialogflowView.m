@@ -113,6 +113,7 @@
 }
 
 -(void)reloadhistory{
+    [rcmessages removeAllObjects];
     for (RCMessage *message in UDS.historyMess){
         [rcmessages addObject:message];
     }

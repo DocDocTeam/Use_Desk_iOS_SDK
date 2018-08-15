@@ -390,13 +390,12 @@
 - (IBAction)actionInputSend:(id)sender
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
-	//if ([textInput.text length] != 0)
-	//{
+    if ([textInput.text length] != 0)
+    {
 		[self actionSendMessage:textInput.text];
-		[self dismissKeyboard];
 		textInput.text = nil;
 		[self inputPanelUpdate];
-	//}
+    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------

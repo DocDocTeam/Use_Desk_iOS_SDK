@@ -336,9 +336,17 @@
     }
     else{
         for(int i = 0; i < [sendImageArr count];i++){
-            PHAsset * asset = [sendImageArr objectAtIndex:i];
-            NSString *content = [NSString stringWithFormat:@"data:image/png;base64,%@",[UseDeskSDKHelp imageToNSString:[self getAssetThumbnail:asset]]];
-            [UDS sendMessage:text withFileName:@"file" fileType:@"image/png" contentBase64:content];
+            UIImage *pickedImage;
+            if ([sendImageArr[i] isKindOfClass:PHAsset.class]) {
+                pickedImage = [self getAssetThumbnail:sendImageArr[i]];
+            } else {
+                pickedImage = sendImageArr[i];
+            }
+            NSString *content = [NSString stringWithFormat:@"data:image/png;base64,%@",[UseDeskSDKHelp imageToNSString:pickedImage]];
+            [UDS sendMessage:text
+                withFileName:@"file.png"
+                    fileType:@"image/png"
+               contentBase64:content];
         }
         sendImageArr = nil;
         self.labelAttachmentFile.hidden = YES;

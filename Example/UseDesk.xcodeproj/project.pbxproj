@@ -222,7 +222,6 @@
 				6003F587195388D20070C39A /* Frameworks */,
 				6003F588195388D20070C39A /* Resources */,
 				EB4701DC5E7368EAC6E2EDAF /* [CP] Embed Pods Frameworks */,
-				83D8C846BA56D45A02049F30 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -349,48 +348,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		83D8C846BA56D45A02049F30 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-UseDesk_Example/Pods-UseDesk_Example-resources.sh",
-				"${PODS_ROOT}/../../UseDesk/Classes/AudioView.xib",
-				"${PODS_ROOT}/../../UseDesk/Classes/icon_file.png",
-				"${PODS_ROOT}/../../UseDesk/Classes/ic_dislike.png",
-				"${PODS_ROOT}/../../UseDesk/Classes/ic_like.png",
-				"${PODS_ROOT}/../../UseDesk/Classes/RCMessagesView.xib",
-				"${PODS_ROOT}/../../UseDesk/Classes/rcmessages_audiopause@2x.png",
-				"${PODS_ROOT}/../../UseDesk/Classes/rcmessages_audioplay@2x.png",
-				"${PODS_ROOT}/../../UseDesk/Classes/rcmessages_manual@2x.png",
-				"${PODS_ROOT}/../../UseDesk/Classes/rcmessages_videoplay@2x.png",
-				"${PODS_ROOT}/../../UseDesk/Classes/rcmessage_attach@2x.png",
-				"${PODS_ROOT}/../../UseDesk/Classes/rcmessage_audio@2x.png",
-				"${PODS_ROOT}/../../UseDesk/Classes/rcmessage_send@2x.png",
-				"${PODS_ROOT}/../../UseDesk/Classes/UDOfflineForm.xib",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AudioView.nib",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/icon_file.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ic_dislike.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ic_like.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/RCMessagesView.nib",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/rcmessages_audiopause@2x.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/rcmessages_audioplay@2x.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/rcmessages_manual@2x.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/rcmessages_videoplay@2x.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/rcmessage_attach@2x.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/rcmessage_audio@2x.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/rcmessage_send@2x.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/UDOfflineForm.nib",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-UseDesk_Example/Pods-UseDesk_Example-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		EB4701DC5E7368EAC6E2EDAF /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -408,6 +365,7 @@
 				"${BUILT_PRODUCTS_DIR}/QBImagePickerController/QBImagePickerController.framework",
 				"${BUILT_PRODUCTS_DIR}/RCAudioPlayer/RCAudioPlayer.framework",
 				"${BUILT_PRODUCTS_DIR}/Socket.IO-Client-Swift/SocketIO.framework",
+				"${BUILT_PRODUCTS_DIR}/UseDesk/UseDesk.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -421,6 +379,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QBImagePickerController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCAudioPlayer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketIO.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UseDesk.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

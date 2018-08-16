@@ -68,9 +68,10 @@
         [rcmessages addObject:message];
         [self refreshTableView1];
 
-        
-        if(message.incoming)
-            [UDAudio playMessageIncoming];
+
+        // TODO: Разобраться с загрузкой звуков
+//        if(message.incoming)
+//            [UDAudio playMessageIncoming];
 
     };
     
@@ -314,7 +315,9 @@
 	NSString *text = fulfillment[@"speech"];
 	//---------------------------------------------------------------------------------------------------------------------------------------------
 	[self addMessage:text incoming:YES];
-	[UDAudio playMessageIncoming];
+    
+    // TODO: Разобраться с загрузкой звуков
+//    [UDAudio playMessageIncoming];
 }
 
 #pragma mark - User actions

@@ -58,5 +58,6 @@ typedef void (^UDSFeedbackAnswerMessageBlock)(BOOL succes);
 +(UseDeskSDK*)getInstance;
 +(void)killInstance;
 +(UseDeskSDK*)createNewInstance;
++(NSBundle *)assetBundle;
 
 @end

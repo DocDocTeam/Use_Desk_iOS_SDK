@@ -61,7 +61,9 @@
     if(self.dislikeButton == nil){
         
         self.dislikeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [self.dislikeButton setBackgroundImage:[UIImage imageNamed:@"ic_dislike.png"]
+        [self.dislikeButton setBackgroundImage:[UIImage imageNamed:@"ic_dislike.png"
+                                                          inBundle:[UseDeskSDK assetBundle]
+                                     compatibleWithTraitCollection:nil]
                                    forState:UIControlStateNormal];
         [self.dislikeButton addTarget:self
                             action:@selector(dislikeButton_pressed:)
@@ -74,7 +76,9 @@
     if(self.likeButton == nil){
         
         self.likeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [self.likeButton setBackgroundImage:[UIImage imageNamed:@"ic_like.png"]
+        [self.likeButton setBackgroundImage:[UIImage imageNamed:@"ic_like.png"
+                                                       inBundle:[UseDeskSDK assetBundle]
+                                  compatibleWithTraitCollection:nil]
                        forState:UIControlStateNormal];
         [self.likeButton addTarget:self
                 action:@selector(likeButton_pressed:)

@@ -15,10 +15,18 @@
 #import "NSDate+Helpers.h"
 #import "MBProgressHUD.h"
 
+@interface UseDeskSDK()
+
+@property (nonatomic, strong) NSBundle *assetBundle;
+
+@end
+
 @implementation UseDeskSDK
 
+@synthesize assetBundle = _assetBundle;
 
 static UseDeskSDK * s_instance;
+static NSBundle *_assetBundle;
 
 - (UIViewController *)topController {
     UIViewController *top = UIApplication.sharedApplication.keyWindow.rootViewController;
@@ -48,6 +56,15 @@ static UseDeskSDK * s_instance;
         s_instance = nil;
     }
     return [UseDeskSDK getInstance];
+}
+
++ (NSBundle *)assetBundle {
+    if (_assetBundle == nil) {
+        NSBundle *framework = [NSBundle bundleForClass:self.class];
+        NSString *resourcePath = [framework pathForResource:@"UseDesk" ofType:@"bundle"];
+        _assetBundle = [NSBundle bundleWithPath:resourcePath];
+    }
+    return _assetBundle;
 }
 
 - (BOOL)dialogShown {
@@ -83,7 +100,7 @@ static UseDeskSDK * s_instance;
             }else{
                 if([error isEqualToString:@"noOperators"]){
                     [hud hideAnimated:YES];
-                    UDOfflineForm *offline = [[UDOfflineForm alloc] initWithNibName:@"UDOfflineForm" bundle:nil];
+                    UDOfflineForm *offline = [[UDOfflineForm alloc] initWithNibName:@"UDOfflineForm" bundle:[UseDeskSDK assetBundle]];
                     offline.url = url;
                     UDNavigationController *navController = [[UDNavigationController alloc] initWithRootViewController:offline];
                     [self.topController presentViewController:navController animated:YES completion:nil];

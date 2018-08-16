@@ -24,6 +24,8 @@
 #import "RCAudioMessageCell.h"
 #import "RCLocationMessageCell.h"
 
+#import "UseDeskSDK.h"
+
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 @interface RCMessagesView()
 {
@@ -36,6 +38,9 @@
 	CGPoint pointAudioStart;
 	AVAudioRecorder *audioRecorder;
 }
+
+@property (nonatomic, strong) NSBundle * assetBundle;
+
 @end
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -45,12 +50,13 @@
 @synthesize viewLoadEarlier;
 @synthesize viewTypingIndicator;
 @synthesize viewInput, buttonInputAttach, buttonInputAudio, buttonInputSend, textInput, viewInputAudio, labelInputAudio;
+@synthesize assetBundle;
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 - (id)init
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
-	self = [self initWithNibName:@"RCMessagesView" bundle:nil];
+	self = [self initWithNibName:@"RCMessagesView" bundle:[UseDeskSDK assetBundle]];
 	//---------------------------------------------------------------------------------------------------------------------------------------------
 
 	//---------------------------------------------------------------------------------------------------------------------------------------------

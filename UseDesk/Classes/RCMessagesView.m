@@ -41,6 +41,7 @@
 
 @property (strong, nonatomic) IBOutlet UIView *subInputView;
 @property (nonatomic, strong) NSBundle * assetBundle;
+@property (nonatomic, readonly) NSString *trimmedMessage;
 
 @end
 //-------------------------------------------------------------------------------------------------------------------------------------------------
@@ -166,6 +167,10 @@
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
 	return nil;
+}
+
+- (NSString *)trimmedMessage {
+    return [textInput.text stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" \n"]];
 }
 
 #pragma mark - Avatar methods
@@ -331,8 +336,8 @@
 - (void)inputPanelUpdate
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
-	buttonInputAudio.hidden = ([textInput.text length] != 0);
-	buttonInputSend.hidden = ([textInput.text length] == 0);
+    buttonInputAudio.hidden = ([self.trimmedMessage length] != 0);
+	buttonInputSend.hidden = ([self.trimmedMessage length] == 0);
     [self scrollToBottom:NO];
 }
 
@@ -400,9 +405,9 @@
 - (IBAction)actionInputSend:(id)sender
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
-    if ([textInput.text length] != 0)
+    if ([self.trimmedMessage length] != 0)
     {
-		[self actionSendMessage:textInput.text];
+		[self actionSendMessage:self.trimmedMessage];
 		textInput.text = nil;
 		[self inputPanelUpdate];
     }

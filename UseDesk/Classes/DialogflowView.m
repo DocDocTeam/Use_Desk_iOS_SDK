@@ -439,12 +439,8 @@
     NSLog(@"Selected assets:");
     NSLog(@"%@", assets);
     sendImageArr = [NSArray arrayWithArray:assets];
-    self.labelAttachmentFile.text =
-        [NSString localizedStringWithFormat:[@"%lu attachments" localize],(unsigned long)[sendImageArr count]];
-    self.labelAttachmentFile.hidden = NO;
-    self.buttonInputSend.hidden = NO;
-    
     [self dismissViewControllerAnimated:YES completion:NULL];
+    [self actionSendMessage:@""];
 }
 
 - (void)qb_imagePickerControllerDidCancel:(QBImagePickerController *)imagePickerController
@@ -460,15 +456,8 @@
     
     UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
     sendImageArr = [NSArray arrayWithObject:chosenImage];
-    self.labelAttachmentFile.hidden = NO;
-    self.labelAttachmentFile.text =
-        [NSString stringWithFormat:@"%lu attachment",(unsigned long)[sendImageArr count]];
-    
-    self.buttonInputSend.hidden = NO;
-   // self.imageView.image = chosenImage;
-    
     [picker dismissViewControllerAnimated:YES completion:NULL];
-    
+    [self actionSendMessage:@""];
 }
 
 #pragma mark - User actions (menu)

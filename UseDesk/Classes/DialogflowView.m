@@ -6,7 +6,9 @@
 #import "MBProgressHUD.h"
 #import <QBImagePickerController/QBImagePickerController.h>
 #import <AVFoundation/AVFoundation.h>
+#import <Photos/Photos.h>
 #import "NSString+Localize.h"
+
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 @interface DialogflowView () <UIImagePickerControllerDelegate,UINavigationControllerDelegate,QBImagePickerControllerDelegate>
 {
@@ -415,7 +417,7 @@
     switch (status) {
         case AVAuthorizationStatusDenied:
         case AVAuthorizationStatusRestricted:
-            [self showNoCameraAccessDialog];
+            [self showNoAccessDialog:[@"permissions.camera_denied_message" localize]];
             return;
         default:
             break;
@@ -428,11 +430,30 @@
     
 }
 
-- (void)showNoCameraAccessDialog {
+- (void)selectPhoto {
+    PHAuthorizationStatus status = [PHPhotoLibrary authorizationStatus];
+    switch (status) {
+        case PHAuthorizationStatusDenied:
+        case PHAuthorizationStatusRestricted:
+            [self showNoAccessDialog:[@"permissions.gallery_denied_message" localize]];
+            return;
+        default:
+            break;
+    }
+    QBImagePickerController *imagePickerController = [QBImagePickerController new];
+    imagePickerController.delegate = self;
+    imagePickerController.allowsMultipleSelection = YES;
+    imagePickerController.maximumNumberOfSelection = 3;
+    imagePickerController.showsNumberOfSelectedAssets = YES;
+    
+    [self presentViewController:imagePickerController animated:YES completion:NULL];
+}
+
+- (void)showNoAccessDialog:(NSString *)message {
     UIAlertController *permissionPrompt =
-        [UIAlertController alertControllerWithTitle:@""
-                                            message:[@"permissions.camera_denied_message" localize]
-                                     preferredStyle:UIAlertControllerStyleAlert];
+    [UIAlertController alertControllerWithTitle:@""
+                                        message:message
+                                 preferredStyle:UIAlertControllerStyleAlert];
     [permissionPrompt addAction:[UIAlertAction actionWithTitle:[@"permissions.cancel" localize]
                                                          style:UIAlertActionStyleCancel
                                                        handler:nil]];
@@ -443,19 +464,6 @@
                                                            [UIApplication.sharedApplication openURL:settings];
                                                        }]];
     [self presentViewController:permissionPrompt animated:YES completion:nil];
-}
-
-- (void)selectPhoto {
-    
-    QBImagePickerController *imagePickerController = [QBImagePickerController new];
-    imagePickerController.delegate = self;
-    imagePickerController.allowsMultipleSelection = YES;
-    imagePickerController.maximumNumberOfSelection = 3;
-    imagePickerController.showsNumberOfSelectedAssets = YES;
-    
-    [self presentViewController:imagePickerController animated:YES completion:NULL];
-    
-    
 }
 
 #pragma mark - QBImagePickerControllerDelegate

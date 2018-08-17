@@ -17,5 +17,6 @@
 "dialog.online" = "В сети";
 
 "permissions.camera_denied_message" = "Предоставьте доступ к камере, чтобы сделать снимок";
+"permissions.gallery_denied_message" = "Предоставьте доступ к галерее, чтобы выбрать фото";
 "permissions.go_to_settings" = "Перейти в настройки";
 "permissions.cancel" = "Отмена";

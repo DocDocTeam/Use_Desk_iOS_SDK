@@ -199,6 +199,9 @@ static NSBundle *_assetBundle;
     
 }
 
+- (void)disconnect {
+    [socket disconnect];
+}
 
 -(void)action_INITED:(NSArray*)data{
     

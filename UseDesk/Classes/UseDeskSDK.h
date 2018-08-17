@@ -53,7 +53,7 @@ typedef void (^UDSFeedbackAnswerMessageBlock)(BOOL succes);
 -(void)sendMessage:(NSString*)text;
 -(void)sendMessage:(NSString *)text withFileName:(NSString*)fileName fileType:(NSString*)fileType contentBase64:(NSString*)contentBase64;
 -(void)sendMessageFeedBack:(BOOL)status;
-
+-(void)disconnect;
 
 +(UseDeskSDK*)getInstance;
 +(void)killInstance;

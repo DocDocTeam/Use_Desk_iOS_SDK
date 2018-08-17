@@ -5,6 +5,7 @@
 #import "NSDate+Helpers.h"
 #import "MBProgressHUD.h"
 #import <QBImagePickerController/QBImagePickerController.h>
+#import <AVFoundation/AVFoundation.h>
 #import "NSString+Localize.h"
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 @interface DialogflowView () <UIImagePickerControllerDelegate,UINavigationControllerDelegate,QBImagePickerControllerDelegate>
@@ -410,13 +411,38 @@
 }
 
 - (void)takePhoto {
-    
+    AVAuthorizationStatus status = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+    switch (status) {
+        case AVAuthorizationStatusDenied:
+        case AVAuthorizationStatusRestricted:
+            [self showNoCameraAccessDialog];
+            return;
+        default:
+            break;
+    }
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     picker.delegate = self;
     picker.allowsEditing = YES;
     picker.sourceType = UIImagePickerControllerSourceTypeCamera;
     [self presentViewController:picker animated:YES completion:NULL];
     
+}
+
+- (void)showNoCameraAccessDialog {
+    UIAlertController *permissionPrompt =
+        [UIAlertController alertControllerWithTitle:@""
+                                            message:[@"permissions.camera_denied_message" localize]
+                                     preferredStyle:UIAlertControllerStyleAlert];
+    [permissionPrompt addAction:[UIAlertAction actionWithTitle:[@"permissions.cancel" localize]
+                                                         style:UIAlertActionStyleCancel
+                                                       handler:nil]];
+    [permissionPrompt addAction:[UIAlertAction actionWithTitle:[@"permissions.go_to_settings" localize]
+                                                         style:UIAlertActionStyleDefault
+                                                       handler:^(UIAlertAction * _Nonnull action) {
+                                                           NSURL *settings = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+                                                           [UIApplication.sharedApplication openURL:settings];
+                                                       }]];
+    [self presentViewController:permissionPrompt animated:YES completion:nil];
 }
 
 - (void)selectPhoto {
@@ -450,7 +476,7 @@
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
-
+#pragma mark - UIImagePickerControllerDelegate
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     

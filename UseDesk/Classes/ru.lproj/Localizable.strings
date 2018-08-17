@@ -15,3 +15,7 @@
 "dialog.user" = "Вы";
 "dialog.support" = "DD";
 "dialog.online" = "В сети";
+
+"permissions.camera_denied_message" = "Предоставьте доступ к камере, чтобы сделать снимок";
+"permissions.go_to_settings" = "Перейти в настройки";
+"permissions.cancel" = "Отмена";

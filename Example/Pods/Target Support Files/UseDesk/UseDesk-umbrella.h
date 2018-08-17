@@ -12,6 +12,7 @@
 
 #import "AudioView.h"
 #import "DialogflowView.h"
+#import "NSString+Localize.h"
 #import "RCAudioMessageCell.h"
 #import "RCBubbleFooterCell.h"
 #import "RCBubbleHeaderCell.h"

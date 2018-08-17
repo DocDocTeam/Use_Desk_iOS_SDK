@@ -5,6 +5,7 @@
 #import "NSDate+Helpers.h"
 #import "MBProgressHUD.h"
 #import <QBImagePickerController/QBImagePickerController.h>
+#import "NSString+Localize.h"
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 @interface DialogflowView () <UIImagePickerControllerDelegate,UINavigationControllerDelegate,QBImagePickerControllerDelegate>
 {
@@ -149,9 +150,9 @@
 	//---------------------------------------------------------------------------------------------------------------------------------------------
 	if (rcmessage.outgoing)
 	{
-        return @"you";
+        return [@"dialog.user" localize];
 	}
-	else return @"Ad";
+	else return [@"dialog.support" localize];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
@@ -254,7 +255,7 @@
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
 	self.labelTitle1.text = @"UseDesk";
-	self.labelTitle2.text = @"online now";
+	self.labelTitle2.text = [@"dialog.online" localize];
 }
 
 #pragma mark - Refresh methods
@@ -374,10 +375,11 @@
 - (void)actionAttachMessage
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
-    UIActionSheet *popup = [[UIActionSheet alloc] initWithTitle:@"Select Sharing option:" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:
-                            @"Take a Photo",
-                            @"Select From Photos",
-                            nil];
+    UIActionSheet *popup = [[UIActionSheet alloc] initWithTitle:nil
+                                                       delegate:self
+                                              cancelButtonTitle:[@"attachments.cancel" localize]
+                                         destructiveButtonTitle:nil
+                                              otherButtonTitles:[@"attachments.take_photo" localize], [@"attachments.select_photo" localize], nil];
     popup.tag = 1;
     [popup showInView:[UIApplication sharedApplication].keyWindow];
 }
@@ -437,7 +439,8 @@
     NSLog(@"Selected assets:");
     NSLog(@"%@", assets);
     sendImageArr = [NSArray arrayWithArray:assets];
-    self.labelAttachmentFile.text = [NSString stringWithFormat:@"%lu attachment",(unsigned long)[sendImageArr count]];
+    self.labelAttachmentFile.text =
+        [NSString localizedStringWithFormat:[@"%lu attachments" localize],(unsigned long)[sendImageArr count]];
     self.labelAttachmentFile.hidden = NO;
     self.buttonInputSend.hidden = NO;
     
@@ -458,7 +461,8 @@
     UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
     sendImageArr = [NSArray arrayWithObject:chosenImage];
     self.labelAttachmentFile.hidden = NO;
-    self.labelAttachmentFile.text = [NSString stringWithFormat:@"%lu attachment",(unsigned long)[sendImageArr count]];
+    self.labelAttachmentFile.text =
+        [NSString stringWithFormat:@"%lu attachment",(unsigned long)[sendImageArr count]];
     
     self.buttonInputSend.hidden = NO;
    // self.imageView.image = chosenImage;

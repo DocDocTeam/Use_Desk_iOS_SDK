@@ -39,6 +39,7 @@
 	AVAudioRecorder *audioRecorder;
 }
 
+@property (strong, nonatomic) IBOutlet UIView *subInputView;
 @property (nonatomic, strong) NSBundle * assetBundle;
 
 @end
@@ -273,10 +274,13 @@
 	CGRect keyboard = [[info valueForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
 	NSTimeInterval duration = [[info valueForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
 	//---------------------------------------------------------------------------------------------------------------------------------------------
-	CGFloat heightKeyboard = keyboard.size.height;
+	CGFloat offset = -keyboard.size.height;
+    if (@available(iOS 11.0, *)) {
+        offset += self.view.safeAreaInsets.bottom;
+    }
 	//---------------------------------------------------------------------------------------------------------------------------------------------
 	[UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
-        self.view.transform = CGAffineTransformTranslate(CGAffineTransformIdentity, 0, -heightKeyboard);
+        self.view.transform = CGAffineTransformTranslate(CGAffineTransformIdentity, 0, offset);
 	} completion:nil];
 	//---------------------------------------------------------------------------------------------------------------------------------------------
 	[[UIMenuController sharedMenuController] setMenuItems:nil];

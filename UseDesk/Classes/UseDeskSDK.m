@@ -14,6 +14,7 @@
 #import "AFHTTPSessionManager.h"
 #import "NSDate+Helpers.h"
 #import "MBProgressHUD.h"
+#import "NSString+Localize.h"
 
 @interface UseDeskSDK()
 
@@ -75,7 +76,7 @@ static NSBundle *_assetBundle;
 
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.topController.view animated:YES];
     hud.mode = MBProgressHUDModeIndeterminate;
-    hud.label.text = @"Loading";
+    hud.label.text = [@"hud.loading" localize];
     
     NSString *companyId = _companyID;
     NSString * email = _email;

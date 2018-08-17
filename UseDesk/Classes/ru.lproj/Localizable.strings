@@ -1,0 +1,17 @@
+/* 
+  Localizable.strings
+  Pods
+
+  Created by Mark on 16.08.2018.
+  
+*/
+
+"hud.loading" = "Соединяем с поддержкой";
+
+"attachments.take_photo" = "Сделать снимок";
+"attachments.select_photo" = "Выбрать из галереи";
+"attachments.cancel" = "Отмена";
+
+"dialog.user" = "Вы";
+"dialog.support" = "DD";
+"dialog.online" = "В сети";

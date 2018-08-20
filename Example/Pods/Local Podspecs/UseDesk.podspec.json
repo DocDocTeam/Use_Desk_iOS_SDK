@@ -22,13 +22,16 @@
   "requires_arc": true,
   "static_framework": false,
   "ios": {
-    "source_files": "UseDesk/Classes/*.{h,m}"
+    "source_files": "UseDesk/Classes/**/*.{h,m}"
   },
   "resource_bundles": {
     "UseDesk": [
       "UseDesk/Classes/*.{png,jpeg,jpg,storyboard,xib,lproj}"
     ]
   },
+  "public_header_files": [
+    "UseDesk/Classes/*.h"
+  ],
   "frameworks": [
     "UIKit",
     "MapKit",

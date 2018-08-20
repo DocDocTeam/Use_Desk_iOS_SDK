@@ -71,7 +71,7 @@ SPEC CHECKSUMS:
   QBImagePickerController: d54cf93db6decf26baf6ed3472f336ef35cae022
   RCAudioPlayer: c0ddab68cc30359efaa0b6b2f179060c481eef81
   Socket.IO-Client-Swift: 60b71a684692a312c4aba3ef52f186e0e254e868
-  UseDesk: 054c0cd98032aa3b6b739545284adec0753f4d83
+  UseDesk: e83f3a75dc72a84d167f6bccd87d5f850ccf8b12
 
 PODFILE CHECKSUM: fcf138565850e177cae404d362c8ad53891cfcee
 

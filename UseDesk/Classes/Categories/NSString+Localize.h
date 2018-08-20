@@ -9,6 +9,6 @@
 
 @interface NSString (Localize)
 
-- (NSString *)localize;
+- (NSString *)localized;
 
 @end

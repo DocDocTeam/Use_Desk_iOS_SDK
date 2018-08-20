@@ -76,7 +76,7 @@ static NSBundle *_assetBundle;
 
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.topController.view animated:YES];
     hud.mode = MBProgressHUDModeIndeterminate;
-    hud.label.text = [@"hud.loading" localize];
+    hud.label.text = [@"hud.loading" localized];
     
     NSString *companyId = _companyID;
     NSString * email = _email;

@@ -10,7 +10,7 @@
 
 @implementation NSString (Localize)
 
-- (NSString *)localize {
+- (NSString *)localized {
     return NSLocalizedStringFromTableInBundle(self, nil, [UseDeskSDK assetBundle], nil);
 }
 

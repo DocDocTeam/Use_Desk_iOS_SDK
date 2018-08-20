@@ -153,9 +153,9 @@
 	//---------------------------------------------------------------------------------------------------------------------------------------------
 	if (rcmessage.outgoing)
 	{
-        return [@"dialog.user" localize];
+        return [@"dialog.user" localized];
 	}
-	else return [@"dialog.support" localize];
+	else return [@"dialog.support" localized];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
@@ -258,7 +258,7 @@
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
 	self.labelTitle1.text = @"UseDesk";
-	self.labelTitle2.text = [@"dialog.online" localize];
+	self.labelTitle2.text = [@"dialog.online" localized];
 }
 
 #pragma mark - Refresh methods
@@ -381,9 +381,9 @@
 {
     UIActionSheet *popup = [[UIActionSheet alloc] initWithTitle:nil
                                                        delegate:self
-                                              cancelButtonTitle:[@"attachments.cancel" localize]
+                                              cancelButtonTitle:[@"attachments.cancel" localized]
                                          destructiveButtonTitle:nil
-                                              otherButtonTitles:[@"attachments.take_photo" localize], [@"attachments.select_photo" localize], nil];
+                                              otherButtonTitles:[@"attachments.take_photo" localized], [@"attachments.select_photo" localized], nil];
     popup.tag = 1;
     [popup showInView:[UIApplication sharedApplication].keyWindow];
 }
@@ -418,7 +418,7 @@
     switch (status) {
         case AVAuthorizationStatusDenied:
         case AVAuthorizationStatusRestricted:
-            [self showNoAccessDialog:[@"permissions.camera_denied_message" localize]];
+            [self showNoAccessDialog:[@"permissions.camera_denied_message" localized]];
             return;
         default:
             break;
@@ -436,7 +436,7 @@
     switch (status) {
         case PHAuthorizationStatusDenied:
         case PHAuthorizationStatusRestricted:
-            [self showNoAccessDialog:[@"permissions.gallery_denied_message" localize]];
+            [self showNoAccessDialog:[@"permissions.gallery_denied_message" localized]];
             return;
         default:
             break;
@@ -455,10 +455,10 @@
     [UIAlertController alertControllerWithTitle:@""
                                         message:message
                                  preferredStyle:UIAlertControllerStyleAlert];
-    [permissionPrompt addAction:[UIAlertAction actionWithTitle:[@"permissions.cancel" localize]
+    [permissionPrompt addAction:[UIAlertAction actionWithTitle:[@"permissions.cancel" localized]
                                                          style:UIAlertActionStyleCancel
                                                        handler:nil]];
-    [permissionPrompt addAction:[UIAlertAction actionWithTitle:[@"permissions.go_to_settings" localize]
+    [permissionPrompt addAction:[UIAlertAction actionWithTitle:[@"permissions.go_to_settings" localized]
                                                          style:UIAlertActionStyleDefault
                                                        handler:^(UIAlertAction * _Nonnull action) {
                                                            NSURL *settings = [NSURL URLWithString:UIApplicationOpenSettingsURLString];

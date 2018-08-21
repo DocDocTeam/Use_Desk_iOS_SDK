@@ -30,7 +30,7 @@ PODS:
   - QBImagePickerController (3.4.0)
   - RCAudioPlayer (1.01)
   - Socket.IO-Client-Swift (9.0.1)
-  - UseDesk (0.2.2):
+  - UseDesk (0.2.3):
     - AFNetworking (>= 3.1.0)
     - MBAutoGrowingTextView (~> 0.1.0)
     - MBProgressHUD
@@ -75,7 +75,7 @@ SPEC CHECKSUMS:
   QBImagePickerController: d54cf93db6decf26baf6ed3472f336ef35cae022
   RCAudioPlayer: c0ddab68cc30359efaa0b6b2f179060c481eef81
   Socket.IO-Client-Swift: 60b71a684692a312c4aba3ef52f186e0e254e868
-  UseDesk: 580b49d1ce41f1fa4eef48ec04a31e54c42f6854
+  UseDesk: 99446ff8559cc6602a217103b1b14797fadc64b7
 
 PODFILE CHECKSUM: fcf138565850e177cae404d362c8ad53891cfcee
 

@@ -9,6 +9,8 @@
 #import <Photos/Photos.h>
 #import "NSString+Localize.h"
 
+#define MAX_PHOTO_SIDE 2000.0
+
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 @interface DialogflowView () <UIImagePickerControllerDelegate,UINavigationControllerDelegate,QBImagePickerControllerDelegate>
 {
@@ -368,9 +370,20 @@
     
     PHImageRequestOptions *options = [[PHImageRequestOptions alloc]init];
     options.synchronous = true;
+    CGFloat aspectRatio = ((CGFloat)asset.pixelWidth) / asset.pixelHeight;
+    CGSize targetSize;
+    if (aspectRatio > 1) {
+        targetSize = CGSizeMake(MAX_PHOTO_SIDE, MAX_PHOTO_SIDE / aspectRatio);
+    } else {
+        targetSize = CGSizeMake(MAX_PHOTO_SIDE * aspectRatio, MAX_PHOTO_SIDE);
+    }
     
     __block UIImage *image;
-    [PHCachingImageManager.defaultManager requestImageForAsset:asset targetSize:CGSizeMake(asset.pixelWidth, asset.pixelHeight) contentMode:PHImageContentModeAspectFit options:options resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+    [PHCachingImageManager.defaultManager requestImageForAsset:asset
+                                                    targetSize:targetSize
+                                                   contentMode:PHImageContentModeAspectFit
+                                                       options:options
+                                                 resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
         image = result;
     }];
     return image;

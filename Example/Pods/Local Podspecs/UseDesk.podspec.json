@@ -64,6 +64,9 @@
     ],
     "NSDate+Helpers": [
 
+    ],
+    "MBAutoGrowingTextView": [
+      "~> 0.1.0"
     ]
   }
 }

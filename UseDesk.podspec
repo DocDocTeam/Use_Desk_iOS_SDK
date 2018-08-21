@@ -54,4 +54,5 @@ TODO: Add long description of the pod here.
   s.dependency 'NSDate-Escort'
   s.dependency 'QBImagePickerController'
   s.dependency 'NSDate+Helpers'
+  s.dependency 'MBAutoGrowingTextView', '~> 0.1.0'
 end

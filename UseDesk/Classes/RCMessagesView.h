@@ -27,13 +27,11 @@
 @property (strong, nonatomic) IBOutlet UIView *viewTypingIndicator;
 
 @property (strong, nonatomic) IBOutlet UIView *viewInput;
-@property (strong, nonatomic) IBOutlet UIButton *buttonInputAttach;
 @property (strong, nonatomic) IBOutlet UIButton *buttonInputAudio;
 @property (strong, nonatomic) IBOutlet UIButton *buttonInputSend;
 @property (strong, nonatomic) IBOutlet UITextView *textInput;
 @property (strong, nonatomic) IBOutlet UIView *viewInputAudio;
 @property (strong, nonatomic) IBOutlet UILabel *labelInputAudio;
-@property (strong, nonatomic) IBOutlet UILabel *labelAttachmentFile;
 
 
 #pragma mark - Load earlier methods

@@ -16,7 +16,6 @@
                 <outlet property="buttonInputAudio" destination="ss1-G4-3fI" id="MFY-UH-tW4"/>
                 <outlet property="buttonInputSend" destination="aaP-dQ-ykO" id="SVD-OS-0XZ"/>
                 <outlet property="buttonTitle" destination="ig1-I6-dCm" id="4xg-Hh-Xfy"/>
-                <outlet property="labelAttachmentFile" destination="bG1-CG-gi3" id="hmf-F5-VYl"/>
                 <outlet property="labelTitle1" destination="UzC-wc-XB5" id="nPc-dn-Mny"/>
                 <outlet property="labelTitle2" destination="Y8g-Ap-txJ" id="XdR-UU-Lt8"/>
                 <outlet property="subInputView" destination="tU9-ta-XFa" id="6dM-IF-Vtc"/>
@@ -65,18 +64,8 @@
                                         <action selector="actionInputSend:" destination="-1" eventType="touchUpInside" id="AKj-eb-WYm"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wx7-PH-b4G">
-                                    <rect key="frame" x="0.0" y="0.0" width="44" height="50.5"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="44" id="TdM-ns-r9m"/>
-                                    </constraints>
-                                    <state key="normal" image="rcmessage_attach.png"/>
-                                    <connections>
-                                        <action selector="actionInputAttach:" destination="-1" eventType="touchUpInside" id="kU6-3K-VMe"/>
-                                    </connections>
-                                </button>
                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="WF4-Ti-KqT" customClass="MBAutoGrowingTextView">
-                                    <rect key="frame" x="52" y="7" width="210" height="36.5"/>
+                                    <rect key="frame" x="20" y="7" width="242" height="36.5"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="36.5" id="B3v-Xl-c6k"/>
@@ -89,29 +78,15 @@
                                         <outlet property="delegate" destination="-1" id="ysY-ng-J5m"/>
                                     </connections>
                                 </textView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1 attachment" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bG1-CG-gi3">
-                                    <rect key="frame" x="-0.5" y="43" width="45" height="7.5"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="45" id="cR2-Et-Kxw"/>
-                                    </constraints>
-                                    <fontDescription key="fontDescription" type="system" pointSize="6"/>
-                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <color key="highlightedColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </label>
                             </subviews>
                             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                             <constraints>
-                                <constraint firstItem="bG1-CG-gi3" firstAttribute="bottom" secondItem="Wx7-PH-b4G" secondAttribute="bottom" id="1tY-kl-lbw"/>
-                                <constraint firstItem="aaP-dQ-ykO" firstAttribute="top" secondItem="Wx7-PH-b4G" secondAttribute="top" id="91t-SO-CfG"/>
                                 <constraint firstItem="WF4-Ti-KqT" firstAttribute="top" secondItem="xuU-RB-86v" secondAttribute="top" constant="7" id="GAb-8z-4t3"/>
-                                <constraint firstItem="bG1-CG-gi3" firstAttribute="centerX" secondItem="Wx7-PH-b4G" secondAttribute="centerX" id="I8W-od-rRD"/>
                                 <constraint firstItem="aaP-dQ-ykO" firstAttribute="top" secondItem="xuU-RB-86v" secondAttribute="top" id="K5s-ct-t38"/>
-                                <constraint firstItem="WF4-Ti-KqT" firstAttribute="leading" secondItem="Wx7-PH-b4G" secondAttribute="trailing" constant="8" id="KWf-Li-y3j"/>
+                                <constraint firstItem="WF4-Ti-KqT" firstAttribute="leading" secondItem="xuU-RB-86v" secondAttribute="leading" constant="20" symbolic="YES" id="NZX-cP-za5"/>
                                 <constraint firstAttribute="bottom" secondItem="WF4-Ti-KqT" secondAttribute="bottom" constant="7" id="Q8J-eM-W9t"/>
-                                <constraint firstAttribute="bottom" secondItem="Wx7-PH-b4G" secondAttribute="bottom" id="Sfs-Xq-9ak"/>
                                 <constraint firstAttribute="trailing" secondItem="aaP-dQ-ykO" secondAttribute="trailing" constant="6" id="Wny-R1-Wnx"/>
                                 <constraint firstItem="aaP-dQ-ykO" firstAttribute="leading" secondItem="WF4-Ti-KqT" secondAttribute="trailing" constant="8" id="bwM-t3-rRj"/>
-                                <constraint firstItem="Wx7-PH-b4G" firstAttribute="leading" secondItem="xuU-RB-86v" secondAttribute="leading" id="cJY-eL-XRL"/>
                                 <constraint firstAttribute="bottom" secondItem="ss1-G4-3fI" secondAttribute="bottom" id="epQ-8P-fp3"/>
                                 <constraint firstAttribute="bottom" secondItem="aaP-dQ-ykO" secondAttribute="bottom" id="jT3-iW-QV2"/>
                                 <constraint firstItem="ss1-G4-3fI" firstAttribute="top" secondItem="xuU-RB-86v" secondAttribute="top" id="pGI-nP-tFA"/>
@@ -218,7 +193,6 @@
         </view>
     </objects>
     <resources>
-        <image name="rcmessage_attach.png" width="22" height="22"/>
         <image name="rcmessage_send.png" width="22" height="22"/>
     </resources>
 </document>

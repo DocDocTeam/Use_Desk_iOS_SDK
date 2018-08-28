@@ -51,7 +51,7 @@
 @synthesize viewTitle, labelTitle1, labelTitle2, buttonTitle;
 @synthesize viewLoadEarlier;
 @synthesize viewTypingIndicator;
-@synthesize viewInput, buttonInputAttach, buttonInputAudio, buttonInputSend, textInput, viewInputAudio, labelInputAudio;
+@synthesize viewInput, buttonInputAudio, buttonInputSend, textInput, viewInputAudio, labelInputAudio;
 @synthesize assetBundle;
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------

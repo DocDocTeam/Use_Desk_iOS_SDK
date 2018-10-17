@@ -10,13 +10,23 @@
 #import "MBProgressHUD.h"
 #import "UseDeskSDK.h"
 #import "AFHTTPSessionManager.h"
+#import "UIColor+Palette.h"
+#import "NSString+Localize.h"
+#import "BlurPresentationController.h"
 
+#define KEYBOARD_MARGIN 16.0
 
 @interface UDOfflineForm ()
+
+@property (nonatomic, readonly) NSArray *fields;
 
 @end
 
 @implementation UDOfflineForm
+
+- (NSArray *)fields {
+    return @[emailTextField, nameTextField, messageTextField];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -27,14 +37,79 @@
     singleTapGestureRecognizer.numberOfTapsRequired = 1;
     [self.view addGestureRecognizer:singleTapGestureRecognizer];
     
+    headerLabel.text = [@"offline_form.header" localized];
+    emailTextField.placeholder = [@"offline_form.email_placeholder" localized];
+    nameTextField.placeholder = [@"offline_form.name_placeholder" localized];
+    messageTextField.text = [@"offline_form.message_placeholder" localized];
+    messageTextField.textColor = [UIColor lightGrayColor];
+    [cancelButton setTitle:[@"offline_form.cancel" localized] forState:UIControlStateNormal];
+    [sendButton setTitle:[@"offline_form.send" localized] forState:UIControlStateNormal];
+    
+    [self.fields enumerateObjectsUsingBlock:^(UIView *field, NSUInteger idx, BOOL * _Nonnull stop) {
+        [self setUntouchedAppearance:field];
+    }];
+    
+    [NSNotificationCenter.defaultCenter addObserver:self
+                                           selector:@selector(keyboardWillShow:)
+                                               name:UIKeyboardWillShowNotification
+                                             object:nil];
+    [NSNotificationCenter.defaultCenter addObserver:self
+                                           selector:@selector(keyboardWillHide:)
+                                               name:UIKeyboardWillHideNotification
+                                             object:nil];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [emailTextField becomeFirstResponder];
+}
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
     return YES;
 }
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    [self setTouchedAppearance:textField];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    if (textField.hasText) {
+        [self setTouchedAppearance:textField];
+    } else {
+        [self setUntouchedAppearance:textField];
+    }
+}
+
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    if ([textView.text isEqualToString:[@"offline_form.message_placeholder" localized]]) {
+        textView.text = @"";
+        textView.textColor = [UIColor darkTextColor];
+    }
+    [self setTouchedAppearance:textView];
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView {
+    if (textView.hasText) {
+        [self setTouchedAppearance:textView];
+    } else {
+        textView.text = [@"offline_form.message_placeholder" localized];
+        textView.textColor = [UIColor lightGrayColor];
+        [self setUntouchedAppearance:textView];
+    }
+}
+
+- (void)setTouchedAppearance:(UIView *)view {
+    view.backgroundColor = [UIColor whiteColor];
+    view.layer.borderColor = [UIColor ramiGray].CGColor;
+}
+
+- (void)setUntouchedAppearance:(UIView *)view {
+    view.backgroundColor = [UIColor skyGray];
+    view.layer.borderColor = [UIColor skyGray].CGColor;
+}
+
 //********** VIEW TAPPED **********
 -(void) handleSingleTap:(UITapGestureRecognizer *)sender
 {
@@ -46,7 +121,7 @@
 -(IBAction)sendMessage:(id)sender{
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeIndeterminate;
-    hud.label.text = @"Sending Message...";
+    hud.label.text = [@"offline_form.sending_message" localized];
     NSDictionary *body = [self getPostData];
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
@@ -79,7 +154,7 @@
 }
 
 -(NSDictionary*)getPostData{
-    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys: companyIdTextField.text,@"company_id",
+    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys: self.companyId,@"company_id",
                                                                       nameTextField.text,@"name",
                                                                       emailTextField.text,@"email",
                                                                       messageTextField.text,@"message",
@@ -120,6 +195,41 @@
    // [alert addAction:cancel];
     [alert addAction:ok];
     [self presentViewController:alert animated:YES completion:nil];
+}
+
+#pragma mark - UIViewControllerTransitioningDelegate
+
+- (UIPresentationController *)presentationControllerForPresentedViewController:(UIViewController *)presented presentingViewController:(UIViewController *)presenting sourceViewController:(UIViewController *)source {
+    return [[BlurPresentationController alloc] initWithPresentedViewController:presented
+                                                      presentingViewController:presenting];
+}
+
+- (id<UIViewControllerTransitioningDelegate>)transitioningDelegate {
+    return self;
+}
+
+- (UIModalPresentationStyle)modalPresentationStyle {
+    return UIModalPresentationCustom;
+}
+
+#pragma mark - Keyboard
+
+- (void)keyboardWillShow:(NSNotification *)notification {
+    NSDictionary *info = [notification userInfo];
+    CGRect keyboardRect = [info[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    NSTimeInterval duration = [info[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    CGFloat offset = keyboardRect.origin.y - KEYBOARD_MARGIN - contentView.frame.origin.y - contentView.frame.size.height;
+    [UIView animateWithDuration:duration animations:^{
+        contentView.transform = CGAffineTransformMakeTranslation(0, offset);
+    }];
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification {
+    NSDictionary *info = [notification userInfo];
+    NSTimeInterval duration = [info[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    [UIView animateWithDuration:duration animations:^{
+        contentView.transform = CGAffineTransformIdentity;
+    }];
 }
 
 @end

@@ -8,13 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UDOfflineForm : UIViewController <UITextFieldDelegate>{
-    IBOutlet UITextField *companyIdTextField;
+@interface UDOfflineForm : UIViewController <UITextFieldDelegate,UITextViewDelegate, UIViewControllerTransitioningDelegate>{
+    IBOutlet UILabel *headerLabel;
     IBOutlet UITextField *emailTextField;
     IBOutlet UITextField *nameTextField;
-    IBOutlet UITextField *messageTextField;
+    IBOutlet UITextView *messageTextField;
+    IBOutlet UIButton *cancelButton;
+    IBOutlet UIButton *sendButton;
+    IBOutlet UIView *contentView;
 }
 
 @property (nonatomic,strong) NSString *url;
+@property (nonatomic, strong) NSString *companyId;
 
 @end

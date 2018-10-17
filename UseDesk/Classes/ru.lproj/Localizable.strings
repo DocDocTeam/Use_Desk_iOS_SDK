@@ -20,3 +20,11 @@
 "permissions.gallery_denied_message" = "Предоставьте доступ к галерее, чтобы выбрать фото";
 "permissions.go_to_settings" = "Перейти в настройки";
 "permissions.cancel" = "Отмена";
+
+"offline_form.header" = "Обратная связь";
+"offline_form.email_placeholder" = "Email";
+"offline_form.name_placeholder" = "Имя";
+"offline_form.message_placeholder" = "Сообщение";
+"offline_form.cancel" = "Отмена";
+"offline_form.send" = "Отправить";
+"offline_form.sending_message" = "Отправляем сообщение...";

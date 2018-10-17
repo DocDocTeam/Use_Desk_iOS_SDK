@@ -72,7 +72,7 @@ static NSBundle *_assetBundle;
     return [self.topController isKindOfClass:[UDNavigationController class]];
 }
 
--(void)startWithCompanyID:(NSString*)_companyID email:(NSString*)_email url:(NSString*)_url port:(NSString*)_port connectionStatus:(UDSStartBlock)startBlock{
+-(void)startWithCompanyID:(NSString*)_companyID email:(NSString*)_email host:(NSString*)host port:(NSNumber*)port connectionStatus:(UDSStartBlock)startBlock{
 
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.topController.view animated:YES];
     hud.mode = MBProgressHUDModeIndeterminate;
@@ -80,34 +80,28 @@ static NSBundle *_assetBundle;
     
     NSString *companyId = _companyID;
     NSString * email = _email;
-    NSString * url =_url;
-    NSString * port =_port;
-    
-    NSString * urlChat = [NSString stringWithFormat:@"%@:%@",url,port];
-    
+    NSString * urlChat = [self chatUrlWithHost:host andPort:port].absoluteString;
     
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         [UDS startWithoutGUICompanyID:companyId email:email url:urlChat connectionStatus:^(BOOL success, NSString *error) {
-            if ([self dialogShown]) {
-                return;
-            }
-            if(success){
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [hud hideAnimated:YES];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [hud hideAnimated:YES];
+                if ([self dialogShown]) {
+                    return;
+                }
+                if(success){
                     DialogflowView *dialogflowView = [[DialogflowView alloc] init];
                     UDNavigationController *navController = [[UDNavigationController alloc] initWithRootViewController:dialogflowView];
                     [self.topController presentViewController:navController animated:YES completion:nil];
-                });
-            }else{
-                if([error isEqualToString:@"noOperators"]){
-                    [hud hideAnimated:YES];
-                    UDOfflineForm *offline = [[UDOfflineForm alloc] initWithNibName:@"UDOfflineForm" bundle:[UseDeskSDK assetBundle]];
-                    offline.url = url;
-                    UDNavigationController *navController = [[UDNavigationController alloc] initWithRootViewController:offline];
-                    [self.topController presentViewController:navController animated:YES completion:nil];
+                }else{
+                    if([error isEqualToString:@"noOperators"]){
+                        UDOfflineForm *offline = [[UDOfflineForm alloc] initWithNibName:@"UDOfflineForm" bundle:[UseDeskSDK assetBundle]];
+                        offline.url = [self offlineFormUrlWithHost:host].absoluteString;
+                        offline.companyId = companyId;
+                        [self.topController presentViewController:offline animated:YES completion:nil];
+                    }
                 }
-            }
-            
+            });
         }];
         
     });
@@ -386,5 +380,19 @@ static NSBundle *_assetBundle;
     return savedValue;
 }
 
+- (NSURL *)chatUrlWithHost:(NSString *)host andPort:(NSNumber *)port {
+    NSURLComponents *components = [[NSURLComponents alloc] init];
+    components.host = [NSString stringWithFormat:@"pubsub.%@", host];
+    components.scheme = @"https";
+    components.port = port;
+    return components.URL;
+}
+
+- (NSURL *)offlineFormUrlWithHost:(NSString *)host {
+    NSURLComponents *components = [[NSURLComponents alloc] init];
+    components.host = [NSString stringWithFormat:@"secure.%@", host];
+    components.scheme = @"https";
+    return components.URL;
+}
 
 @end

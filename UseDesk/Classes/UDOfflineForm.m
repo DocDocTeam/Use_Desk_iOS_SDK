@@ -125,7 +125,7 @@
     NSDictionary *body = [self getPostData];
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-        [manager.requestSerializer setTimeoutInterval:15.0];
+        manager.requestSerializer = [AFJSONRequestSerializer serializer];
         
         //manager.securityPolicy.allowInvalidCertificates = YES;
         

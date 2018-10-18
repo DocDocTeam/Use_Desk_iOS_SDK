@@ -218,7 +218,7 @@
     NSDictionary *info = [notification userInfo];
     CGRect keyboardRect = [info[UIKeyboardFrameEndUserInfoKey] CGRectValue];
     NSTimeInterval duration = [info[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    CGFloat offset = keyboardRect.origin.y - KEYBOARD_MARGIN - contentView.frame.origin.y - contentView.frame.size.height;
+    CGFloat offset = keyboardRect.origin.y - KEYBOARD_MARGIN - contentView.center.y - contentView.frame.size.height / 2;
     [UIView animateWithDuration:duration animations:^{
         contentView.transform = CGAffineTransformMakeTranslation(0, offset);
     }];

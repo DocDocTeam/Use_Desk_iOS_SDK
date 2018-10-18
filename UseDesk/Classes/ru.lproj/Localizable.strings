@@ -25,6 +25,6 @@
 "offline_form.email_placeholder" = "Email";
 "offline_form.name_placeholder" = "Имя";
 "offline_form.message_placeholder" = "Сообщение";
-"offline_form.cancel" = "Отмена";
+"offline_form.cancel" = "Отменить";
 "offline_form.send" = "Отправить";
 "offline_form.sending_message" = "Отправляем сообщение...";

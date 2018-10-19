@@ -31,7 +31,6 @@ typedef void (^UDSFeedbackAnswerMessageBlock)(BOOL succes);
     SocketIOClient* socket;
     
     NSString *companyID;
-    NSString *email;
     NSString *url;
     NSString *token;
     
@@ -47,8 +46,8 @@ typedef void (^UDSFeedbackAnswerMessageBlock)(BOOL succes);
 @property (nonatomic, readwrite) NSMutableArray *historyMess;
 
 
--(void)startWithCompanyID:(NSString*)_companyID email:(NSString*)_email host:(NSString*)host port:(NSNumber*)port connectionStatus:(UDSStartBlock)startBlock;
--(void)startWithoutGUICompanyID:(NSString*)_companyID email:(NSString*)_email url:(NSString*)_url connectionStatus:(UDSStartBlock)startBlock;
+-(void)startWithCompanyID:(NSString*)_companyID host:(NSString*)host port:(NSNumber*)port connectionStatus:(UDSStartBlock)startBlock;
+-(void)startWithoutGUICompanyID:(NSString*)_companyID url:(NSString*)_url connectionStatus:(UDSStartBlock)startBlock;
 
 -(void)sendMessage:(NSString*)text;
 -(void)sendMessage:(NSString *)text withFileName:(NSString*)fileName fileType:(NSString*)fileType contentBase64:(NSString*)contentBase64;

@@ -16,6 +16,8 @@
 #import "MBProgressHUD.h"
 #import "NSString+Localize.h"
 
+#define TOKEN_KEY @"USEDESK_TOKEN"
+
 @interface UseDeskSDK()
 
 @property (nonatomic, strong) NSBundle *assetBundle;
@@ -72,18 +74,17 @@ static NSBundle *_assetBundle;
     return [self.topController isKindOfClass:[UDNavigationController class]];
 }
 
--(void)startWithCompanyID:(NSString*)_companyID email:(NSString*)_email host:(NSString*)host port:(NSNumber*)port connectionStatus:(UDSStartBlock)startBlock{
+-(void)startWithCompanyID:(NSString*)_companyID host:(NSString*)host port:(NSNumber*)port connectionStatus:(UDSStartBlock)startBlock{
 
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.topController.view animated:YES];
     hud.mode = MBProgressHUDModeIndeterminate;
     hud.label.text = [@"hud.loading" localized];
     
     NSString *companyId = _companyID;
-    NSString * email = _email;
     NSString * urlChat = [self chatUrlWithHost:host andPort:port].absoluteString;
     
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-        [UDS startWithoutGUICompanyID:companyId email:email url:urlChat connectionStatus:^(BOOL success, NSString *error) {
+        [UDS startWithoutGUICompanyID:companyId url:urlChat connectionStatus:^(BOOL success, NSString *error) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [hud hideAnimated:YES];
                 if ([self dialogShown]) {
@@ -118,10 +119,9 @@ static NSBundle *_assetBundle;
     
 }
 
--(void)startWithoutGUICompanyID:(NSString*)_companyID email:(NSString*)_email url:(NSString*)_url connectionStatus:(UDSStartBlock)startBlock{
+-(void)startWithoutGUICompanyID:(NSString*)_companyID url:(NSString*)_url connectionStatus:(UDSStartBlock)startBlock{
   
     companyID = _companyID;
-    email = _email;
     url = _url;
     
     NSURL *urlAdress = [[NSURL alloc] initWithString:url];
@@ -136,8 +136,8 @@ static NSBundle *_assetBundle;
 
     [socket on:@"connect" callback:^(NSArray* data, SocketAckEmitter* ack) {
         NSLog(@"socket connected");
-        NSString *token = [self loadTokenFor:email];
-        NSArray *arrConfStart = [UseDeskSDKHelp config_CompanyID:companyID email:email url:url token:token];
+        NSString *token = [self loadToken];
+        NSArray *arrConfStart = [UseDeskSDKHelp config_CompanyID:companyID url:url token:token];
         [socket emit:@"dispatch" with:arrConfStart];
     }];
     
@@ -147,8 +147,8 @@ static NSBundle *_assetBundle;
     }];
     [socket on:@"disconnect" callback:^(NSArray* data, SocketAckEmitter* ack) {
         NSLog(@"socket disconnect");
-        NSString *token = [self loadTokenFor:email];
-        NSArray *arrConfStart = [UseDeskSDKHelp config_CompanyID:companyID email:email url:url token:token];
+        NSString *token = [self loadToken];
+        NSArray *arrConfStart = [UseDeskSDKHelp config_CompanyID:companyID url:url token:token];
         [socket emit:@"dispatch" with:arrConfStart];
     }];
     
@@ -203,7 +203,7 @@ static NSBundle *_assetBundle;
     
     if([dicServer objectForKey:@"token"] != nil){
         token = [dicServer objectForKey:@"token"];
-        [self save:email token:token];
+        [self saveToken:token];
     }
     
     NSDictionary *setup = [dicServer objectForKey:@"setup"];
@@ -215,11 +215,6 @@ static NSBundle *_assetBundle;
             RCMessage *m = [self parseMessageDic:mess];
             [self.historyMess addObject:m];
         }
-        BOOL waitingEmail = [setup objectForKey:@"waitingEmail"];
-
-        if(waitingEmail)
-            [socket emit:@"dispatch" with:[UseDeskSDKHelp dataEmail:email]];
-
     }
     
 }
@@ -305,17 +300,9 @@ static NSBundle *_assetBundle;
     NSString *type = [dicServer objectForKey:@"type"];
     if(type == nil)
         return NO;
-    if(![type isEqualToString:@"@@chat/current/ADD_MESSAGE"])
+    if(![type isEqualToString:@"@@chat/current/INITED"])
         return NO;
-
-    NSDictionary * message = [dicServer objectForKey:@"message"];
-    
-    if(message != nil){
-        if([[message objectForKey:@"chat"] isKindOfClass:[NSNull class]])
-            return YES;
-    }
-    return NO;
-    
+    return YES;
 }
 
 -(void)action_Feedback_Answer:(NSArray*)data{
@@ -369,14 +356,14 @@ static NSBundle *_assetBundle;
     [socket emit:@"dispatch" with:[UseDeskSDKHelp feedback:status]];
 }
 
--(void)save:(NSString*)email token:(NSString*)token{
-    [[NSUserDefaults standardUserDefaults] setObject:token forKey:email];
+-(void)saveToken:(NSString*)token{
+    [[NSUserDefaults standardUserDefaults] setObject:token forKey:TOKEN_KEY];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
--(NSString*)loadTokenFor:(NSString*)email{
+-(NSString*)loadToken{
     NSString *savedValue = [[NSUserDefaults standardUserDefaults]
-                            stringForKey:email];
+                            stringForKey:TOKEN_KEY];
     return savedValue;
 }
 

@@ -9,7 +9,7 @@
 
 @implementation UseDeskSDKHelp
 
-+(NSArray*)config_CompanyID:(NSString*)companyID email:(NSString*)email url:(NSString*)url token:(NSString*)token{
++(NSArray*)config_CompanyID:(NSString*)companyID url:(NSString*)url token:(NSString*)token{
     NSDictionary *payload = [[NSDictionary alloc] initWithObjectsAndKeys:@"iOS",@"sdk",nil];
     
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithObjectsAndKeys:@"@@server/chat/INIT",@"type",

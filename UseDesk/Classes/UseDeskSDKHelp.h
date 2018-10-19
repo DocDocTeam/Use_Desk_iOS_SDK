@@ -9,7 +9,7 @@
 
 @interface UseDeskSDKHelp : NSObject
 
-+(NSArray*)config_CompanyID:(NSString*)companyID email:(NSString*)email url:(NSString*)url token:(NSString*)token;
++(NSArray*)config_CompanyID:(NSString*)companyID url:(NSString*)url token:(NSString*)token;
 +(NSString *)dictToJson:(NSDictionary *)dict;
 +(NSArray*)dataEmail:(NSString*)email;
 +(NSArray*)messageText:(NSString*)text;

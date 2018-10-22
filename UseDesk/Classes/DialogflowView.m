@@ -177,7 +177,7 @@
     NSDate *dateInLocalTimezone = [rcmessage.date dateByAddingTimeInterval:timeZoneSeconds];
     
     if ([rcmessage.date isToday])
-        return [NSDate stringFromDate:dateInLocalTimezone withFormat:NSDateFormatHms24 andTimeZone:NSDateTimeZoneGMT];
+        return [NSDate stringFromDate:dateInLocalTimezone withFormat:NSDateFormatHm24 andTimeZone:NSDateTimeZoneGMT];
     return [NSDate stringFromDate:dateInLocalTimezone withFormatString:@"dd.MM.yyyy HH:mm" andTimeZone:NSDateTimeZoneGMT];
     
 

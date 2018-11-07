@@ -508,7 +508,10 @@
 	NSIndexPath *indexPath = [RCMenuItem indexPath:sender];
 	RCMessage *rcmessage = [self rcmessage:indexPath];
 	//---------------------------------------------------------------------------------------------------------------------------------------------
-	[[UIPasteboard generalPasteboard] setString:rcmessage.text];
+    NSString *text = rcmessage.text;
+    if (text != (id)[NSNull null] && text.length > 0) {
+        [[UIPasteboard generalPasteboard] setString:text];
+    }
 }
 
 #pragma mark - Table view data source

@@ -17,6 +17,7 @@
 #import "NSString+Localize.h"
 
 #define TOKEN_KEY @"USEDESK_TOKEN"
+#define TIMEOUT 5
 
 @interface UseDeskSDK()
 
@@ -95,7 +96,7 @@ static NSBundle *_assetBundle;
                     UDNavigationController *navController = [[UDNavigationController alloc] initWithRootViewController:dialogflowView];
                     [self.topController presentViewController:navController animated:YES completion:nil];
                 }else{
-                    if([error isEqualToString:@"noOperators"]){
+                    if([error isEqualToString:@"noOperators"] || [error isEqualToString:@"noInternetConnection"]) {
                         UDOfflineForm *offline = [[UDOfflineForm alloc] initWithNibName:@"UDOfflineForm" bundle:[UseDeskSDK assetBundle]];
                         offline.url = [self offlineFormUrlWithHost:host].absoluteString;
                         offline.companyId = companyId;
@@ -132,7 +133,9 @@ static NSBundle *_assetBundle;
     
     socket = [[SocketIOClient alloc] initWithSocketURL:urlAdress config:config];
     
-    [socket connect];
+    [socket connectWithTimeoutAfter:TIMEOUT withHandler:^{
+        startBlock(NO, @"noInternetConnection");
+    }];
 
     [socket on:@"connect" callback:^(NSArray* data, SocketAckEmitter* ack) {
         NSLog(@"socket connected");

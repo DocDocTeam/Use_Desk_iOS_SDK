@@ -144,7 +144,7 @@
            
             
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            [self showAlert:@"Error" text:error.description];
+            [self showAlert:nil text:error.localizedDescription];
             [hud hideAnimated:YES];
            
         }];

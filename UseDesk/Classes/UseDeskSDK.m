@@ -76,18 +76,13 @@ static NSBundle *_assetBundle;
 }
 
 -(void)startWithCompanyID:(NSString*)_companyID host:(NSString*)host port:(NSNumber*)port connectionStatus:(UDSStartBlock)startBlock{
-
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.topController.view animated:YES];
-    hud.mode = MBProgressHUDModeIndeterminate;
-    hud.label.text = [@"hud.loading" localized];
-    
     NSString *companyId = _companyID;
     NSString * urlChat = [self chatUrlWithHost:host andPort:port].absoluteString;
     
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         [UDS startWithoutGUICompanyID:companyId url:urlChat connectionStatus:^(BOOL success, NSString *error) {
+            startBlock(success, error);
             dispatch_async(dispatch_get_main_queue(), ^{
-                [hud hideAnimated:YES];
                 if ([self dialogShown]) {
                     return;
                 }

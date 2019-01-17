@@ -81,8 +81,8 @@ static NSBundle *_assetBundle;
     
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         [UDS startWithoutGUICompanyID:companyId url:urlChat connectionStatus:^(BOOL success, NSString *error) {
-            startBlock(success, error);
             dispatch_async(dispatch_get_main_queue(), ^{
+                startBlock(success, error);
                 if ([self dialogShown]) {
                     return;
                 }

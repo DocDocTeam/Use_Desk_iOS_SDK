@@ -28,3 +28,7 @@
 "offline_form.cancel" = "Отменить";
 "offline_form.send" = "Отправить";
 "offline_form.sending_message" = "Отправляем сообщение...";
+
+"offline_form.errors.incorrect_email" = "Укажите корректный адрес электронной почты";
+"offline_form.errors.empty_name" = "Укажите, как к Вам обращаться";
+"offline_form.errors.empty_message" = "Расскажите о вашей проблеме";

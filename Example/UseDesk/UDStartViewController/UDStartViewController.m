@@ -51,9 +51,12 @@
 }
 
 -(IBAction)startChatButton:(id)sender{
-    
-    [UDS startWithCompanyID:companyIdTextField.text email:emailTextField.text url:urlTextField.text port:portTextField.text connectionStatus:^(BOOL success, NSString *error) {
-        
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+    [UDS startWithCompanyID:companyIdTextField.text
+                       host:urlTextField.text
+                       port:[formatter numberFromString:portTextField.text]
+           connectionStatus:^(BOOL success, NSString *error) {
+               
     }];
 }
 

@@ -18,7 +18,17 @@
 
 @interface UDOfflineForm ()
 
+@property (weak, nonatomic) IBOutlet UIView *emailErrorContainer;
+@property (weak, nonatomic) IBOutlet UILabel *emailErrorLabel;
+@property (weak, nonatomic) IBOutlet UIView *nameErrorContainer;
+@property (weak, nonatomic) IBOutlet UILabel *nameErrorLabel;
+@property (weak, nonatomic) IBOutlet UIView *messageErrorContainer;
+@property (weak, nonatomic) IBOutlet UILabel *messageErrorLabel;
+
 @property (nonatomic, readonly) NSArray *fields;
+@property (nonatomic, readonly) NSString *name;
+@property (nonatomic, readonly) NSString *email;
+@property (nonatomic, readonly) NSString *message;
 
 @end
 
@@ -26,6 +36,18 @@
 
 - (NSArray *)fields {
     return @[emailTextField, nameTextField, messageTextField];
+}
+
+- (NSString *)name {
+    return [nameTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" "]];
+}
+
+- (NSString *)email {
+    return [emailTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" "]];
+}
+
+- (NSString *)message {
+    return [messageTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" "]];
 }
 
 - (void)viewDidLoad {
@@ -42,6 +64,11 @@
     nameTextField.placeholder = [@"offline_form.name_placeholder" localized];
     messageTextField.text = [@"offline_form.message_placeholder" localized];
     messageTextField.textColor = [UIColor lightGrayColor];
+    
+    [self.emailErrorContainer setHidden:YES];
+    [self.nameErrorContainer setHidden:YES];
+    [self.messageErrorContainer setHidden:YES];
+    
     [cancelButton setTitle:[@"offline_form.cancel" localized] forState:UIControlStateNormal];
     [sendButton setTitle:[@"offline_form.send" localized] forState:UIControlStateNormal];
     
@@ -119,6 +146,12 @@
 
 
 -(IBAction)sendMessage:(id)sender{
+    [self.fields enumerateObjectsUsingBlock:^(UIControl *field, NSUInteger idx, BOOL * _Nonnull stop) {
+        [field resignFirstResponder];
+    }];
+    if (![self validate]) {
+        return;
+    }
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeIndeterminate;
     hud.label.text = [@"offline_form.sending_message" localized];
@@ -155,12 +188,54 @@
 
 -(NSDictionary*)getPostData{
     NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys: self.companyId,@"company_id",
-                                                                      nameTextField.text,@"name",
-                                                                      emailTextField.text,@"email",
-                                                                      messageTextField.text,@"message",
+                                                                      self.name,@"name",
+                                                                      self.email,@"email",
+                                                                      self.message,@"message",
                                                                          nil];
     return dic;
     
+}
+
+- (BOOL)validate {
+    return [self validateEmail] &
+        [self validateName] &
+        [self validateMessage];
+}
+
+- (BOOL)validateMessage {
+    if (![self.message isEqualToString:@""]
+        && ![self.message isEqualToString:[@"offline_form.message_placeholder" localized]]) {
+        [self.messageErrorContainer setHidden:YES];
+        return YES;
+    } else {
+        [self.messageErrorContainer setHidden:NO];
+        self.messageErrorLabel.text = [@"offline_form.errors.empty_message" localized];
+        return NO;
+    }
+}
+
+- (BOOL)validateName {
+    if (![self.name isEqualToString:@""]) {
+        [self.nameErrorContainer setHidden:YES];
+        return YES;
+    } else {
+        [self.nameErrorContainer setHidden:NO];
+        self.nameErrorLabel.text = [@"offline_form.errors.empty_name" localized];
+        return NO;
+    }
+}
+
+- (BOOL)validateEmail {
+    NSString *regex = @"^[A-Za-z0-9._-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+    if ([predicate evaluateWithObject:self.email]) {
+        [self.emailErrorContainer setHidden:YES];
+        return YES;
+    } else {
+        [self.emailErrorContainer setHidden:NO];
+        self.emailErrorLabel.text = [@"offline_form.errors.incorrect_email" localized];
+        return NO;
+    }
 }
 
 -(IBAction)cancelMessage:(id)sender{

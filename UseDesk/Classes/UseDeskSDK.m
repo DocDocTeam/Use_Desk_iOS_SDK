@@ -159,6 +159,7 @@ static NSBundle *_assetBundle;
         BOOL no_operators = [self action_INITED_no_operators:data];
        
         if(no_operators && startBlock) {
+            [socket disconnect];
             startBlock(NO,@"noOperators");
             return;
         }

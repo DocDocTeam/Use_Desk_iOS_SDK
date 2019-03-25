@@ -11,6 +11,7 @@
 #endif
 
 #import "AudioView.h"
+#import "BlurPresentationController.h"
 #import "DialogflowView.h"
 #import "RCAudioMessageCell.h"
 #import "RCBubbleFooterCell.h"

@@ -29,7 +29,6 @@ PODS:
   - ProgressHUD (2.60)
   - QBImagePickerController (3.4.0)
   - RCAudioPlayer (1.01)
-  - Socket.IO-Client-Swift (9.0.1)
   - UseDesk (0.2.5):
     - AFNetworking (>= 3.1.0)
     - MBAutoGrowingTextView (~> 0.1.0)
@@ -40,7 +39,6 @@ PODS:
     - ProgressHUD
     - QBImagePickerController
     - RCAudioPlayer
-    - Socket.IO-Client-Swift (~> 9.0.1)
 
 DEPENDENCIES:
   - UseDesk (from `../`)
@@ -57,7 +55,6 @@ SPEC REPOS:
     - ProgressHUD
     - QBImagePickerController
     - RCAudioPlayer
-    - Socket.IO-Client-Swift
 
 EXTERNAL SOURCES:
   UseDesk:
@@ -74,9 +71,8 @@ SPEC CHECKSUMS:
   ProgressHUD: 4e4efbaf4f5de8bd32e0c4c3b6644a90ea1a8c3e
   QBImagePickerController: d54cf93db6decf26baf6ed3472f336ef35cae022
   RCAudioPlayer: c0ddab68cc30359efaa0b6b2f179060c481eef81
-  Socket.IO-Client-Swift: 60b71a684692a312c4aba3ef52f186e0e254e868
-  UseDesk: d4fc0cefe107d44fbfcb3ae36b5a751087ec7e10
+  UseDesk: 89a891216c3bba8c4d341e581459babda48d4bf5
 
 PODFILE CHECKSUM: fcf138565850e177cae404d362c8ad53891cfcee
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.6.1

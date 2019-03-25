@@ -22,7 +22,7 @@
   "requires_arc": true,
   "static_framework": false,
   "ios": {
-    "source_files": "UseDesk/Classes/**/*.{h,m}"
+    "source_files": "UseDesk/Classes/**/*.{h,m,swift}"
   },
   "resource_bundles": {
     "UseDesk": [
@@ -49,9 +49,6 @@
     ],
     "RCAudioPlayer": [
 
-    ],
-    "Socket.IO-Client-Swift": [
-      "~> 9.0.1"
     ],
     "AFNetworking": [
       ">= 3.1.0"

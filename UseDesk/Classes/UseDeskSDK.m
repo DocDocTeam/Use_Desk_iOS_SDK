@@ -15,6 +15,7 @@
 #import "NSDate+Helpers.h"
 #import "MBProgressHUD.h"
 #import "NSString+Localize.h"
+#import <UseDesk/UseDesk-Swift.h>
 
 #define TOKEN_KEY @"USEDESK_TOKEN"
 #define TIMEOUT 5

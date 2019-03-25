@@ -6,12 +6,12 @@
 //
 
 #import <Foundation/Foundation.h>
-@import SocketIO;
 #import "RCMessagesView.h"
 #import "RCMessage.h"
 #import "Utility.h"
 #import "UseDeskSDKHelp.h"
 
+@class SocketIOClient;
 
 #define UDS [UseDeskSDK getInstance]
 

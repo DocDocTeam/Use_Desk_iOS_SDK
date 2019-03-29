@@ -136,8 +136,8 @@ static NSBundle *_assetBundle;
     [socket on:@"connect" callback:^(NSArray* data, SocketAckEmitter* ack) {
         NSLog(@"socket connected");
         NSString *token = [self loadToken];
-        NSArray *arrConfStart = [UseDeskSDKHelp config_CompanyID:companyID url:url token:token];
-        [socket emit:@"dispatch" with:arrConfStart];
+        NSArray *arrConfStart = [UseDeskSDKHelp config_CompanyID:self->companyID url:self->url token:token];
+        [self->socket emit:@"dispatch" with:arrConfStart];
     }];
     
     [socket on:@"error" callback:^(NSArray* data, SocketAckEmitter* ack) {
@@ -147,8 +147,8 @@ static NSBundle *_assetBundle;
     [socket on:@"disconnect" callback:^(NSArray* data, SocketAckEmitter* ack) {
         NSLog(@"socket disconnect");
         NSString *token = [self loadToken];
-        NSArray *arrConfStart = [UseDeskSDKHelp config_CompanyID:companyID url:url token:token];
-        [socket emit:@"dispatch" with:arrConfStart];
+        NSArray *arrConfStart = [UseDeskSDKHelp config_CompanyID:self->companyID url:self->url token:token];
+        [self->socket emit:@"dispatch" with:arrConfStart];
     }];
     
     [socket on:@"dispatch" callback:^(NSArray* data, SocketAckEmitter* ack) {

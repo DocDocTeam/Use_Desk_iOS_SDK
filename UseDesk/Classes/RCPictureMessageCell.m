@@ -112,7 +112,7 @@
                             dispatch_async(dispatch_get_main_queue(), ^{
                                 rcmessage.picture_image = [UIImage imageWithData:data];
                                 weakSelf.imageView.image = rcmessage.picture_image;
-                                [spinner stopAnimating];
+                                [self->spinner stopAnimating];
                                 rcmessage.status = RC_STATUS_SUCCEED;
                                 rcmessage.file.type = mimeType;
 
@@ -121,7 +121,7 @@
                             dispatch_async(dispatch_get_main_queue(), ^{
                                 rcmessage.picture_image = [UIImage imageNamed:@"icon_file.png"];
                                 weakSelf.imageView.image = rcmessage.picture_image;
-                                [spinner stopAnimating];
+                                [self->spinner stopAnimating];
                                 rcmessage.status = RC_STATUS_SUCCEED;
                                 rcmessage.file.type = mimeType;
 

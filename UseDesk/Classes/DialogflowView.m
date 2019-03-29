@@ -58,14 +58,14 @@
 	[self updateTitleDetails];
     
     UDS.connectBlock = ^(BOOL success, NSString *error) {
-        [hudErrorConnection hideAnimated:YES];
+        [self->hudErrorConnection hideAnimated:YES];
         [self reloadhistory];
 
     };
     
     UDS.newMessageBlock = ^(BOOL success, RCMessage *message) {
         //[rcmessages removeAllObjects];
-        [rcmessages addObject:message];
+        [self->rcmessages addObject:message];
         [self refreshTableView1];
 
 
@@ -97,12 +97,12 @@
     
     UDS.errorBlock = ^(NSArray *errors) {
         if(errors.count > 0)
-            hudErrorConnection.label.text = [errors objectAtIndex:0];
-        [hudErrorConnection showAnimated:YES];
+            self->hudErrorConnection.label.text = [errors objectAtIndex:0];
+        [self->hudErrorConnection showAnimated:YES];
     };
     
     UDS.feedbackMessageBlock = ^ (RCMessage *message){
-        [rcmessages addObject:message];
+        [self->rcmessages addObject:message];
         [self refreshTableView1];
     };
     
@@ -530,9 +530,12 @@
         NSURL *url = [NSURL URLWithString:rcmessage.file.content];
         
         if ([[UIApplication sharedApplication] respondsToSelector:@selector(openURL:options:completionHandler:)]) {
-            [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:NULL];
+            if (@available(iOS 10.0, *)) {
+                [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:NULL];
+            } else {
+                [[UIApplication sharedApplication] openURL:url];
+            }
         }else{
-            // Fallback on earlier versions
             [[UIApplication sharedApplication] openURL:url];
         }
     }

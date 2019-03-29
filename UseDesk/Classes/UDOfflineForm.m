@@ -295,7 +295,7 @@
     NSTimeInterval duration = [info[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     CGFloat offset = keyboardRect.origin.y - KEYBOARD_MARGIN - contentView.center.y - contentView.frame.size.height / 2;
     [UIView animateWithDuration:duration animations:^{
-        contentView.transform = CGAffineTransformMakeTranslation(0, offset);
+        self->contentView.transform = CGAffineTransformMakeTranslation(0, offset);
     }];
 }
 
@@ -303,7 +303,7 @@
     NSDictionary *info = [notification userInfo];
     NSTimeInterval duration = [info[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     [UIView animateWithDuration:duration animations:^{
-        contentView.transform = CGAffineTransformIdentity;
+        self->contentView.transform = CGAffineTransformIdentity;
     }];
 }
 

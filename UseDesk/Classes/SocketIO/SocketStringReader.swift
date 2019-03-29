@@ -65,7 +65,7 @@ struct SocketStringReader {
         
         advance(by: message.distance(from: message.startIndex, to: foundRange.lowerBound) + 1)
         
-        return substring.substring(to: foundRange.lowerBound)
+        return String(substring[..<foundRange.lowerBound])
     }
     
     mutating func readUntilEnd() -> String {

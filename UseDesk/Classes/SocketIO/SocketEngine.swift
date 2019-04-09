@@ -226,8 +226,7 @@ public final class SocketEngine : NSObject, URLSessionDelegate, SocketEnginePoll
     private func handleBase64(message: String) {
         // binary in base64 string
         let noPrefix = message[message.index(message.startIndex, offsetBy: 2)..<message.endIndex]
-
-        if let data = NSData(base64Encoded: noPrefix, options: .ignoreUnknownCharacters) {
+        if let data = NSData(base64Encoded: String(noPrefix), options: .ignoreUnknownCharacters) {
             client?.parseEngineBinaryData(data as Data)
         }
     }

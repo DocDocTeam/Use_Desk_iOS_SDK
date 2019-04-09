@@ -82,7 +82,7 @@ public final class SocketAckEmitter : NSObject {
 ///     ...
 /// }
 /// ```
-public final class OnAckCallback : NSObject {
+@objc public final class OnAckCallback : NSObject {
     private let ackNumber: Int
     private let items: [Any]
     private weak var socket: SocketIOClient?

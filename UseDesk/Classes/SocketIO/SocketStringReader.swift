@@ -33,7 +33,7 @@ struct SocketStringReader {
     }
     
     var currentCharacter: String {
-        return String(message[currentIndex])
+        return String(UnicodeScalar(message.utf16[currentIndex])!)
     }
     
     init(message: String) {

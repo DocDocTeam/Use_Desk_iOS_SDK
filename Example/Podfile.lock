@@ -28,7 +28,6 @@ PODS:
   - NYTPhotoViewer/Core (1.2.0)
   - ProgressHUD (2.60)
   - QBImagePickerController (3.4.0)
-  - RCAudioPlayer (1.01)
   - UseDesk (0.2.5):
     - AFNetworking (>= 3.1.0)
     - MBAutoGrowingTextView (~> 0.1.0)
@@ -38,7 +37,6 @@ PODS:
     - NYTPhotoViewer (= 1.2.0)
     - ProgressHUD
     - QBImagePickerController
-    - RCAudioPlayer
 
 DEPENDENCIES:
   - UseDesk (from `../`)
@@ -54,7 +52,6 @@ SPEC REPOS:
     - NYTPhotoViewer
     - ProgressHUD
     - QBImagePickerController
-    - RCAudioPlayer
 
 EXTERNAL SOURCES:
   UseDesk:
@@ -70,8 +67,7 @@ SPEC CHECKSUMS:
   NYTPhotoViewer: 323217e4590a1586eb3c9674b3fefb0fb8b57896
   ProgressHUD: 4e4efbaf4f5de8bd32e0c4c3b6644a90ea1a8c3e
   QBImagePickerController: d54cf93db6decf26baf6ed3472f336ef35cae022
-  RCAudioPlayer: c0ddab68cc30359efaa0b6b2f179060c481eef81
-  UseDesk: 89a891216c3bba8c4d341e581459babda48d4bf5
+  UseDesk: 2351993ef45727aeb6e6a1d13414deb40ff6a032
 
 PODFILE CHECKSUM: fcf138565850e177cae404d362c8ad53891cfcee
 

@@ -18,7 +18,7 @@
   "platforms": {
     "ios": "9.0"
   },
-  "swift_version": "4.0",
+  "swift_version": "4.2",
   "requires_arc": true,
   "static_framework": false,
   "ios": {
@@ -45,9 +45,6 @@
       "1.2.0"
     ],
     "ProgressHUD": [
-
-    ],
-    "RCAudioPlayer": [
 
     ],
     "AFNetworking": [

@@ -162,7 +162,6 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/NYTPhotoViewer/NYTPhotoViewer.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/ProgressHUD/ProgressHUD.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/QBImagePickerController/QBImagePickerController.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/RCAudioPlayer/RCAudioPlayer.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/UseDesk/UseDesk.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
@@ -175,7 +174,6 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/NYTPhotoViewer/NYTPhotoViewer.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/ProgressHUD/ProgressHUD.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/QBImagePickerController/QBImagePickerController.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/RCAudioPlayer/RCAudioPlayer.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/UseDesk/UseDesk.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then

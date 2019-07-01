@@ -47,7 +47,6 @@ TODO: Add long description of the pod here.
   s.dependency 'MBProgressHUD'
   s.dependency 'NYTPhotoViewer', '1.2.0'
   s.dependency 'ProgressHUD'
-  s.dependency 'RCAudioPlayer', '1.1.0'
   s.dependency 'AFNetworking', '>= 3.1.0'
   s.dependency 'NSDate-Escort'
   s.dependency 'QBImagePickerController'

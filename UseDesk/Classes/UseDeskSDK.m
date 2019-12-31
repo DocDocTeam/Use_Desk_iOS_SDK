@@ -76,7 +76,7 @@ static NSBundle *_assetBundle;
     return [self.topController isKindOfClass:[UDNavigationController class]];
 }
 
--(void)startWithCompanyID:(NSString*)_companyID host:(NSString*)host port:(NSNumber*)port connectionStatus:(UDSStartBlock)startBlock{
+-(void)startWithCompanyID:(NSString*)_companyID host:(NSString*)host port:(NSNumber*)port presentationStyle:(UIModalPresentationStyle)presentationStyle connectionStatus:(UDSStartBlock)startBlock{
     NSString *companyId = _companyID;
     NSString * urlChat = [self chatUrlWithHost:host andPort:port].absoluteString;
     
@@ -90,12 +90,14 @@ static NSBundle *_assetBundle;
                 if(success){
                     DialogflowView *dialogflowView = [[DialogflowView alloc] init];
                     UDNavigationController *navController = [[UDNavigationController alloc] initWithRootViewController:dialogflowView];
+                    navController.modalPresentationStyle = presentationStyle;
                     [self.topController presentViewController:navController animated:YES completion:nil];
                 }else{
                     if([error isEqualToString:@"noOperators"] || [error isEqualToString:@"noInternetConnection"]) {
                         UDOfflineForm *offline = [[UDOfflineForm alloc] initWithNibName:@"UDOfflineForm" bundle:[UseDeskSDK assetBundle]];
                         offline.url = [self offlineFormUrlWithHost:host].absoluteString;
                         offline.companyId = companyId;
+                        offline.modalPresentationStyle = presentationStyle;
                         [self.topController presentViewController:offline animated:YES completion:nil];
                     }
                 }

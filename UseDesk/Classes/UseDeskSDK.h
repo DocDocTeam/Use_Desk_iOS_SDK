@@ -46,7 +46,7 @@ typedef void (^UDSFeedbackAnswerMessageBlock)(BOOL succes);
 @property (nonatomic, readwrite) NSMutableArray *historyMess;
 
 
--(void)startWithCompanyID:(NSString*)_companyID host:(NSString*)host port:(NSNumber*)port connectionStatus:(UDSStartBlock)startBlock;
+-(void)startWithCompanyID:(NSString*)_companyID host:(NSString*)host port:(NSNumber*)port presentationStyle:(UIModalPresentationStyle)presentationStyle connectionStatus:(UDSStartBlock)startBlock;
 -(void)startWithoutGUICompanyID:(NSString*)_companyID url:(NSString*)_url connectionStatus:(UDSStartBlock)startBlock;
 
 -(void)sendMessage:(NSString*)text;

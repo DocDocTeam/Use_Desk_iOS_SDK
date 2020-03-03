@@ -37,7 +37,13 @@
 
 -(void)setBarTintColor:(UIColor *)__barTintColor{
     barTintColor = __barTintColor;
-    self.navigationBar.barTintColor = barTintColor;
+    if (@available(iOS 13, *)) {
+        UINavigationBarAppearance *appearance = self.navigationBar.standardAppearance.copy;
+        appearance.backgroundColor = barTintColor;
+        self.navigationBar.standardAppearance = appearance;
+    } else {
+        self.navigationBar.barTintColor = barTintColor;
+    }
 }
 
 -(void)setTitleTextAttributes:(UIColor *)__titleTextAttributes{

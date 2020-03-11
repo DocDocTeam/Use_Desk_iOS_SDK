@@ -93,13 +93,12 @@ static NSBundle *_assetBundle;
                     navController.modalPresentationStyle = presentationStyle;
                     [self.topController presentViewController:navController animated:YES completion:nil];
                 }else{
-                    if([error isEqualToString:@"noOperators"] || [error isEqualToString:@"noInternetConnection"]) {
-                        UDOfflineForm *offline = [[UDOfflineForm alloc] initWithNibName:@"UDOfflineForm" bundle:[UseDeskSDK assetBundle]];
-                        offline.url = [self offlineFormUrlWithHost:host].absoluteString;
-                        offline.companyId = companyId;
-                        offline.modalPresentationStyle = presentationStyle;
-                        [self.topController presentViewController:offline animated:YES completion:nil];
-                    }
+                    [self disconnect];
+                    UDOfflineForm *offline = [[UDOfflineForm alloc] initWithNibName:@"UDOfflineForm" bundle:[UseDeskSDK assetBundle]];
+                    offline.url = [self offlineFormUrlWithHost:host].absoluteString;
+                    offline.companyId = companyId;
+                    offline.modalPresentationStyle = presentationStyle;
+                    [self.topController presentViewController:offline animated:YES completion:nil];
                 }
             });
         }];
@@ -128,7 +127,7 @@ static NSBundle *_assetBundle;
     NSDictionary *config = @{
                              @"log":@YES
                              };
-    
+
     socket = [[SocketIOClient alloc] initWithSocketURL:urlAdress config:config];
     
     [socket connectWithTimeoutAfter:TIMEOUT withHandler:^{
@@ -143,14 +142,9 @@ static NSBundle *_assetBundle;
     }];
     
     [socket on:@"error" callback:^(NSArray* data, SocketAckEmitter* ack) {
-        if(self.errorBlock)
-            self.errorBlock(data);
-    }];
-    [socket on:@"disconnect" callback:^(NSArray* data, SocketAckEmitter* ack) {
-        NSLog(@"socket disconnect");
-        NSString *token = [self loadToken];
-        NSArray *arrConfStart = [UseDeskSDKHelp config_CompanyID:self->companyID url:self->url token:token];
-        [self->socket emit:@"dispatch" with:arrConfStart];
+        if (startBlock) {
+            startBlock(NO, @"unknownError");
+        }
     }];
     
     [socket on:@"dispatch" callback:^(NSArray* data, SocketAckEmitter* ack) {
@@ -197,7 +191,9 @@ static NSBundle *_assetBundle;
 }
 
 - (void)disconnect {
+    [socket removeAllHandlers];
     [socket disconnect];
+    socket = nil;
 }
 
 -(void)action_INITED:(NSArray*)data{
